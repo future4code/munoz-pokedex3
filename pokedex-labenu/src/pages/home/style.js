@@ -11,7 +11,6 @@ export const HeaderToolbar = styled(Toolbar)`
   gap: 16px;
   flex-wrap: wrap;
 `;
-
 export const HeaderLogo = styled.img`
   width: 6vw;
 `;
@@ -20,3 +19,4 @@ export const HeaderLogo = styled.img`
 //   <Typography component={"h1"} variant={"body1"} {...props} />
 // ))`
 //   font-weight: bold;
+
