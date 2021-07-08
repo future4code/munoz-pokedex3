@@ -1,10 +1,12 @@
 import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
-import { HeaderAppBar } from "./style";
+import styled from "styled-components";
+import { HeaderAppBar, HeaderLogo } from "./style";
 import { HeaderToolbar } from "./style";
 import { Container } from "@material-ui/core";
 import { Button } from "@material-ui/core";
-import styled from "styled-components";
+import Logo from "../../img/pokebola-logo2.png";
+
 
 const CardsContainer = styled.div`
   display: flex;
@@ -38,8 +40,8 @@ export function Home(props) {
     <div>
       <HeaderAppBar position={"sticky"}>
         <HeaderToolbar component={Container}>
-          Pokemóns
-          <Button variant="outlined" onClick={irParaPokedex}>
+          <HeaderLogo src={Logo} alt="Logo" />
+          <Button variant="contained" color="secondary" onClick={irParaPokedex}>
             Pokedex
           </Button>
         </HeaderToolbar>
