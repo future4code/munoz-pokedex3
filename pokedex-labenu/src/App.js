@@ -1,5 +1,5 @@
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Pokedex from "./pages/pokedex";
 import Details from "./pages/details";
 import Home from "./pages/home";
@@ -9,7 +9,8 @@ import { theme } from "./themes";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 function App() {
-  const [pokedex, setPokedex] = useState([
+  const [pokedex, setPokedex] = useState([])
+  const [pokemons, setPokemons] = useState([
     {
       nome: "Pikachu",
       tipo: "Elétrico",
@@ -48,13 +49,21 @@ function App() {
           <BrowserRouter>
             <Switch>
               <Route path={"/pokedex"}>
-                <Pokedex pokedex={pokedex} setPokedex={setPokedex} />
+                <Pokedex
+                  pokedex={pokedex}
+                  setPokedex={setPokedex}
+                />
               </Route>
               <Route path={"/details"}>
                 <Details />
               </Route>
               <Route path={"/"}>
-                <Home pokedex={pokedex} setPokedex={setPokedex} />
+                <Home
+                  pokemons={pokemons}
+                  setPokemons={setPokemons}
+                  pokedex={pokedex}
+                  setPokedex={setPokedex}
+                />
               </Route>
             </Switch>
           </BrowserRouter>

@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { HeaderAppBar } from "./style";
 import { HeaderToolbar } from "./style";
 import { Container } from "@material-ui/core";
@@ -28,6 +28,12 @@ export function Home(props) {
   const history = useHistory();
   const irParaPokedex = () => history.push("pokedex");
   const detalhes = () => history.push("details");
+  
+  const addPokedex = (pokemon) => {
+    const newPokedex = [...props.pokedex, pokemon]
+    props.setPokedex(newPokedex)
+  }
+  
   return (
     <div>
       <HeaderAppBar position={"sticky"}>
@@ -39,15 +45,15 @@ export function Home(props) {
         </HeaderToolbar>
       </HeaderAppBar>
       <button onClick={detalhes}>Detalhes</button>
-      {console.log(props.pokedex)}
 
       <CardsContainer>
-        {props.pokedex.map(pokemon => {
+        {props.pokemons.map(pokemon => {
           return (
             <PokemonContainer>
               <img src={pokemon.url} />
               <h2>{pokemon.nome}</h2>
               <p>{pokemon.tipo}</p>
+              <button onClick={() => addPokedex(pokemon)}>Adicionar Pokedex</button>
             </PokemonContainer>
           )
         })}
