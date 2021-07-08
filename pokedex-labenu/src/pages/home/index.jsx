@@ -1,9 +1,10 @@
 import { useHistory } from "react-router-dom";
 import React from "react";
-import { HeaderAppBar } from "./style";
+import { HeaderAppBar, HeaderLogo } from "./style";
 import { HeaderToolbar } from "./style";
 import { Container } from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import Logo from "../../img/pokebola-logo2.png";
 
 export function Home() {
   const history = useHistory();
@@ -13,8 +14,8 @@ export function Home() {
     <div>
       <HeaderAppBar position={"sticky"}>
         <HeaderToolbar component={Container}>
-          Pokemóns
-          <Button variant="outlined" onClick={irParaPokedex}>
+          <HeaderLogo src={Logo} alt="Logo" />
+          <Button variant="contained" color="secondary" onClick={irParaPokedex}>
             Pokedex
           </Button>
         </HeaderToolbar>
