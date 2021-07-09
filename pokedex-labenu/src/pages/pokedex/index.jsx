@@ -26,6 +26,12 @@ export function Pokedex(props) {
   const voltar = () => history.push("home");
   const detalhes = () => history.push("details");
 
+  const deletePokemon = (index) => {
+    const deletando = Array.from(props.pokedex);
+    deletando.splice(index, 1);
+    props.setPokedex(deletando);
+  }
+
   return (
     <div>
       Pokedex!
@@ -33,13 +39,14 @@ export function Pokedex(props) {
       <button onClick={detalhes}>Detalhes</button>
 
       <CardsContainer>
+
         {props.pokedex.map(pokemon => {
           return (
             <PokemonContainer>
               <img src={pokemon.url} />
               <h2>{pokemon.nome}</h2>
               <p>{pokemon.tipo}</p>
-              <button>Remover da Pokedex</button>
+              <button onClick={() => deletePokemon(pokemon.nome)}>Remover da Pokedex</button>
             </PokemonContainer>
           )
         })}

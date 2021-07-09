@@ -30,12 +30,12 @@ export function Home(props) {
   const history = useHistory();
   const irParaPokedex = () => history.push("pokedex");
   const detalhes = () => history.push("details");
-  
+
   const addPokedex = (pokemon) => {
     const newPokedex = [...props.pokedex, pokemon]
     props.setPokedex(newPokedex)
   }
-  
+
   return (
     <div>
       <HeaderAppBar position={"sticky"}>
