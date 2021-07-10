@@ -6,10 +6,14 @@ import { PowerInputSharp } from "@material-ui/icons";
 import {
   BarButtonLeft, BarButtonRight, BgCurve1Left, BgCurve2Left, BigBlueButton, DownArrow, ButtomBottomPicture, ButtonGlass, ButtonTopPicture, Cross, CrossMidCircle, Curve1Left, Curve2Left, DownTriangle, Junction, Junction1, Junction2, LeftArrow, LeftfTriangle, LeftSide, MiddleCross, MiniButtonGreen, MiniButtonRed, MiniButtonYellow, MyPokedex, Picture, Reflect, RightArrow, RightSide, RightTriangle, Screen, Speakers, UpArrow, TopPicture, UpTriangle, StatsScreen, BlueButtonsContainer1, BlueButtonsContainer2, BlueButton, MiniButtonOrange, MiniButtonDarkGreen, BarButtonRightSide, YellowBox1, YellowBox2, BgCurve1Right, BgCurve2Right, Curve1Right, Curve2Right, LogoDiv
 } from "./style";
+
 import { useState } from "react";
 import { getPokemonList } from "../../requests/pokemonAPI";
 
 export function Pokedex(props) {
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+
   const history = useHistory();
   const voltar = () => history.push("home");
   const detalhes = () => history.push("details");
@@ -20,7 +24,6 @@ export function Pokedex(props) {
     props.setPokedex(deletando);
   }
 
-  const [currentIndex, setCurrentIndex] = useState(0)
 
   const nextPokemon = () => {
     if (currentIndex === (props.pokemons.length - 1)){

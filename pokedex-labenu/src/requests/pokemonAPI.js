@@ -2,17 +2,22 @@ import axios from 'axios'
 import { base_url } from "../constants/api";
 
 
-export const getPokemonList = async () => {
+export const getPokemonList = async (path, setListData, setPreviousPage, setNextPage) => {
   try {
-    const pokemonList = await axios.get(`${base_url}/pokemon`)
-    
-    const pokemonDetails = pokemonList?.data.results.map((pokemon) => {
-      // console.log('POKEMON: ', pokemon);
+    const pokemonList = await axios.get(`${base_url}${path}`)
+  
+    setPreviousPage(pokemonList.data.previous)
+    setNextPage(pokemonList.data.next)
+
+    const pokemonDetailsPromisses = pokemonList?.data.results.map((pokemon) => {
       return getPokemonDetails(pokemon.name)
     })
 
+    const pokemonDetails = await Promise.all(pokemonDetailsPromisses)
     console.log('RESPOSTA: ', pokemonDetails);
-    // console.log('RESPOSTA: ', pokemonList?.data.results);
+
+    setListData(pokemonDetails)
+
   } catch (error) {
     console.log('ERRO LIST: ', error?.data);
   }
@@ -22,7 +27,7 @@ export const getPokemonList = async () => {
 export const getPokemonDetails = async (pokemonName) => {
   try {
     const response = await axios.get(`${base_url}/pokemon/${pokemonName}`)
-    
+
     const resposta = {
       nome: pokemonName,
       tipo: response.data.types[0].type.name,
@@ -31,29 +36,29 @@ export const getPokemonDetails = async (pokemonName) => {
       url: response.data.sprites.front_default
     }
 
-    // console.log('response: ', response);
-    console.log('Detalhes do pokemon: ', resposta);
+    // console.log('Detalhes do pokemon: ', resposta);
     return resposta
-    
+
   } catch (error) {
     console.log('ERRO CATCH: ', error);
   }
-
 }
 
+// export const getNextPagePokemonList = async (setData) => {
+//   try {
+//     const pokemonList = await axios.get(`${base_url}/pokemon`)
 
-// export const getPokemonList = () => {
+//     const pokemonDetailsPromisses = pokemonList?.data.results.map((pokemon) => {
+//       return getPokemonDetails(pokemon.name)
+//     })
 
-//   const pokemon = axios.get(`${base_url}/pokemon`)
-//     .then((response) => {
-//       const pokemonDetails = response.data.results.map((pokemon) => {
-//         const pokemonData = getPokemonDetails(pokemon.name)
-//         return pokemonData
-//       })
-//       return pokemonDetails
-//     })
-//     .catch((error) => {
-//       console.log('ERRO LIST: ', error?.data);
-//     })
-//     console.log('POKEMON ', pokemonDetails);
+//     const pokemonDetails = await Promise.all(pokemonDetailsPromisses)
+//     console.log('RESPOSTA: ', pokemonDetails);
+
+//     setData(pokemonDetails)
+
+//   } catch (error) {
+//     console.log('ERRO LIST: ', error?.data);
+//   }
+
 // }

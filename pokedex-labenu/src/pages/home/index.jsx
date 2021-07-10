@@ -47,6 +47,8 @@ export function Home(props) {
         </HeaderToolbar>
       </HeaderAppBar>
       <button onClick={detalhes}>Detalhes</button>
+      <button onClick={props.goToPreviousPage}>Página Anterior</button>
+      <button onClick={props.goToNextPage}>Próxima Página</button>
 
       <CardsContainer>
         {props.pokemons.map(pokemon => {
