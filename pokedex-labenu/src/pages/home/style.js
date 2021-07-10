@@ -12,11 +12,10 @@ export const HeaderToolbar = styled(Toolbar)`
   flex-wrap: wrap;
 `;
 export const HeaderLogo = styled.img`
-  width: 6vw;
+  width: 3vw;
 `;
 
 // ((props) => (
 //   <Typography component={"h1"} variant={"body1"} {...props} />
 // ))`
 //   font-weight: bold;
-

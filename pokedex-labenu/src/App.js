@@ -9,36 +9,36 @@ import { theme } from "./themes";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 function App() {
-  const [pokedex, setPokedex] = useState([])
+  const [pokedex, setPokedex] = useState([]);
   const [pokemons, setPokemons] = useState([
     {
       nome: "Pikachu",
       tipo: "Elétrico",
       tamanho: "40cm",
       peso: "35kg",
-      url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
+      url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
     },
     {
       nome: "Charmander",
       tipo: "Fogo",
       tamanho: "55cm",
       peso: "45kg",
-      url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png"
+      url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
     },
     {
       nome: "Squirtle",
       tipo: "Água",
       tamanho: "45cm",
       peso: "70kg",
-      url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png"
+      url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png",
     },
     {
       nome: "Bulbassauro",
       tipo: "Planta",
       tamanho: "30cm",
       peso: "50kg",
-      url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
-    }
+      url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
+    },
   ]);
 
   return (
@@ -49,10 +49,7 @@ function App() {
           <BrowserRouter>
             <Switch>
               <Route path={"/pokedex"}>
-                <Pokedex
-                  pokedex={pokedex}
-                  setPokedex={setPokedex}
-                />
+                <Pokedex pokedex={pokedex} setPokedex={setPokedex} />
               </Route>
               <Route path={"/details"}>
                 <Details />
