@@ -51,6 +51,7 @@ function App() {
               <Route path={"/pokedex"}>
                 <Pokedex
                   pokedex={pokedex}
+                  pokemons={pokemons}
                   setPokedex={setPokedex}
                 />
               </Route>
