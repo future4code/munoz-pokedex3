@@ -65,6 +65,7 @@ export function Home(props) {
   const history = useHistory();
   const irParaPokedex = () => history.push("pokedex");
   const detalhes = () => history.push("details");
+  const game = () => history.push("game");
 
   const addPokedex = (pokemon) => {
 
@@ -86,6 +87,7 @@ export function Home(props) {
       <button onClick={detalhes}>Detalhes</button>
       <button onClick={props.goToPreviousPage}>Página Anterior</button>
       <button onClick={props.goToNextPage}>Próxima Página</button>
+      <button onClick={game}>Jogue agora!</button>
 
       <Container>
         <CardsContainer>
