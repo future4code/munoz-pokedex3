@@ -26,7 +26,7 @@ export function Pokedex(props) {
 
 
   const nextPokemon = () => {
-    if (currentIndex === (props.pokemons.length - 1)){
+    if (currentIndex === (props.pokedex.length - 1)){
       setCurrentIndex(0)
     } else {
       const next = currentIndex + 1;
@@ -35,18 +35,25 @@ export function Pokedex(props) {
   }
   const lastPokemon = () => {
     if (currentIndex === 0){
-      setCurrentIndex(props.pokemons.length - 1)
+      setCurrentIndex(props.pokedex.length - 1)
     } else {
       const last = currentIndex - 1;
       setCurrentIndex(last)
     }
   }
+
+  const renderList = props.pokedex.map((pokemon) => {
+    return <p>{pokemon.nome}</p>
+  })
+
   return (
     <div>
       Pokedex!
       <button onClick={voltar}>Voltar</button>
       <button onClick={detalhes}>Detalhes</button>
       <button onClick={getPokemonList}>Get Pokemon</button>
+
+      {renderList}
 
 
       <MyPokedex>
@@ -74,7 +81,7 @@ export function Pokedex(props) {
               <ButtonTopPicture />
             </TopPicture>
             <Picture>
-              <img src={props.pokemons[currentIndex].url} alt={props.pokemons[currentIndex].nome} height="170" />
+              <img src={props.pokedex[currentIndex]?.url} alt={props.pokedex[currentIndex]?.nome} height="170" />
             </Picture>
             <ButtomBottomPicture />
             <Speakers>
@@ -107,10 +114,10 @@ export function Pokedex(props) {
         </LeftSide>
         <RightSide>
           <StatsScreen>
-            <strong>Nome:</strong> {props.pokemons[currentIndex].nome}<br />
-            <strong>Tipo:</strong> {props.pokemons[currentIndex].tipo}<br />
-            <strong>Tamanho:</strong> {props.pokemons[currentIndex].tamanho}'<br />
-            <strong>Peso:</strong> {props.pokemons[currentIndex].peso}<br /><br />
+            <strong>Nome:</strong> {props.pokedex[currentIndex]?.nome}<br />
+            <strong>Tipo:</strong> {props.pokedex[currentIndex]?.tipo}<br />
+            <strong>Tamanho:</strong> {props.pokedex[currentIndex]?.tamanho}'<br />
+            <strong>Peso:</strong> {props.pokedex[currentIndex]?.peso}<br /><br />
             <strong>Descrição</strong><br />
             Descrição do pokemon.
           </StatsScreen>
