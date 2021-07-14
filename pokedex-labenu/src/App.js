@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import Pokedex from "./pages/pokedex";
 import Details from "./pages/details";
 import Home from "./pages/home";
+import Game from "./pages/game";
 import GlobalStyle from "./globals/GlobalStyles/GlobalStyles";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./themes";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import { getPokemonList } from "./requests/pokemonAPI";
+import ComponentFooter from "./pages/Footer";
 
 function App() {
   const [pokedex, setPokedex] = useState([]);
@@ -16,24 +18,29 @@ function App() {
   const [previousPageURL, setPreviousPageURL] = useState(null);
 
   useEffect(() => {
-    getPokemonList('/pokemon', setPokemons, setPreviousPageURL, setNextPageURL)
-  }, [])
+    getPokemonList("/pokemon", setPokemons, setPreviousPageURL, setNextPageURL);
+  }, []);
 
   const goToNextPage = () => {
-    let path = nextPageURL.split('v2')
-    path = path[1]
+    let path = nextPageURL.split("v2");
+    path = path[1];
 
-    getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL)
-  }
+    getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL);
+  };
 
   const goToPreviousPage = () => {
     if (previousPageURL) {
-      let path = previousPageURL.split('v2')
-      path = path[1]
 
-      getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL)
+
+
+      let path = previousPageURL.split("v2");
+      path = path[1];
+
+      getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL);
+
     }
-  }
+  };
+
 
   return (
     <div>
@@ -42,16 +49,16 @@ function App() {
           <GlobalStyle />
           <BrowserRouter>
             <Switch>
-              <Route path={"/pokedex"}>
+              <Route exact path={"/pokedex"}>
                 <Pokedex
                   pokedex={pokedex}
                   setPokedex={setPokedex}
                 />
               </Route>
-              <Route path={"/details"}>
+              <Route exact path={"/details"}>
                 <Details />
               </Route>
-              <Route path={"/"}>
+              <Route exact path={"/"}>
                 <Home
                   pokemons={pokemons}
                   setPokemons={setPokemons}
@@ -60,6 +67,9 @@ function App() {
                   goToPreviousPage={goToPreviousPage}
                   goToNextPage={goToNextPage}
                 />
+              </Route>
+              <Route exact path={"/game"}>
+                <Game />
               </Route>
             </Switch>
           </BrowserRouter>
