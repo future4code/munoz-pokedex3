@@ -74,17 +74,17 @@ function App() {
           <GlobalStyle />
           <BrowserRouter>
             <Switch>
-              <Route path={"/pokedex"}>
+              <Route exact path={"/pokedex"}>
                 <Pokedex
                   pokedex={pokedex}
                   pokemons={pokemons}
                   setPokedex={setPokedex}
                 />
               </Route>
-              <Route path={"/details"}>
+              <Route exact path={"/details"}>
                 <Details />
               </Route>
-              <Route path={"/"}>
+              <Route exact path={"/"}>
                 <Home
                   pokemons={pokemons}
                   setPokemons={setPokemons}
@@ -96,7 +96,6 @@ function App() {
               </Route>
             </Switch>
           </BrowserRouter>
-          <ComponentFooter />
         </StyledThemeProvider>
       </ThemeProvider>
     </div>

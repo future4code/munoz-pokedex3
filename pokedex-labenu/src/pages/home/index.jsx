@@ -6,21 +6,19 @@ import {
   CardsContainer,
   ContainerButton,
   ContainerNomeBotão,
-  HeaderAppBar,
-  HeaderLogo,
   PokemonContainer,
   PokemonImage,
-  HeaderToolbar,
 } from "./style";
+
 import { Container } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import Logo from "../../assets/pokebola-logo3.png";
 import ArrowLeft from "../../assets/arrowLeft.png";
 import ArrowRight from "../../assets/arrowRight.png";
+import ComponentFooter from "../Footer";
+import Header from "../../Components/Header";
 
 export function Home(props) {
   const history = useHistory();
-  const irParaPokedex = () => history.push("pokedex");
+  const changePage = (path) => history.push(path);
   // const detalhes = () => history.push("details");
 
   const addPokedex = (pokemon) => {
@@ -30,14 +28,7 @@ export function Home(props) {
 
   return (
     <div>
-      <HeaderAppBar position={"sticky"}>
-        <HeaderToolbar component={Container}>
-          <HeaderLogo src={Logo} alt="Logo" />
-          <Button variant="contained" color="secondary" onClick={irParaPokedex}>
-            Pokedex
-          </Button>
-        </HeaderToolbar>
-      </HeaderAppBar>
+      <Header />
       {/* <button onClick={detalhes}>Detalhes</button> */}
       <ContainerButton>
         <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />
@@ -65,6 +56,7 @@ export function Home(props) {
           <Arrows src={ArrowRight} onClick={props.goToNextPage} />
         </ContainerButton>
       </Container>
+      <ComponentFooter />
     </div>
   );
 }

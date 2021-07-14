@@ -17,8 +17,10 @@ import Tooltip from "../../Components/Tooltip";
 
 export default function ComponentFooter() {
   const history = useHistory();
-  const irParaPokedex = () => history.push("pokedex");
-  const procurarMaisPokemons = () => history.push("home");
+  const irParaPokedex = () => {
+    history.push("/pokedex");
+  };
+  const procurarMaisPokemons = () => history.push("/");
 
   return (
     <>

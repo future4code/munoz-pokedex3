@@ -67,7 +67,7 @@ const getPokemon = () => {
   axios
     .get(`https://pokeapi.co/api/v2/pokemon/bulbasaur`)
     .then((response) => {
-      console.log(response);
+      console.log(`DIFERENTE: ${response}`);
     })
     .catch((err) => console.log(err));
 };

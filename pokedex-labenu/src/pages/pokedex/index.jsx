@@ -58,6 +58,7 @@ import {
 import { useState } from "react";
 import { getPokemonList } from "../../requests/pokemonAPI";
 import ComponentFooter from "../Footer";
+import Header from "../../Components/Header";
 
 export function Pokedex(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,6 +91,7 @@ export function Pokedex(props) {
   };
   return (
     <div>
+      <Header />
       Pokedex!
       <button onClick={voltar}>Voltar</button>
       <button onClick={detalhes}>Detalhes</button>
@@ -195,6 +197,7 @@ export function Pokedex(props) {
           <Curve2Right />
         </RightSide>
       </MyPokedex>
+      <ComponentFooter />
     </div>
   );
 }
