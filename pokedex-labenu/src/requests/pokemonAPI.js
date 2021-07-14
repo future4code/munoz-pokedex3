@@ -1,48 +1,49 @@
-import axios from 'axios'
+import axios from "axios";
 import { base_url } from "../constants/api";
 
-
-export const getPokemonList = async (path, setListData, setPreviousPage, setNextPage) => {
+export const getPokemonList = async (
+  path,
+  setListData,
+  setPreviousPage,
+  setNextPage
+) => {
   try {
-    const pokemonList = await axios.get(`${base_url}${path}`)
-  
-    setPreviousPage(pokemonList.data.previous)
-    setNextPage(pokemonList.data.next)
+    const pokemonList = await axios.get(`${base_url}${path}`);
+
+    setPreviousPage(pokemonList.data.previous);
+    setNextPage(pokemonList.data.next);
 
     const pokemonDetailsPromisses = pokemonList?.data.results.map((pokemon) => {
-      return getPokemonDetails(pokemon.name)
-    })
+      return getPokemonDetails(pokemon.name);
+    });
 
-    const pokemonDetails = await Promise.all(pokemonDetailsPromisses)
-    console.log('RESPOSTA: ', pokemonDetails);
+    const pokemonDetails = await Promise.all(pokemonDetailsPromisses);
+    console.log("RESPOSTA: ", pokemonDetails);
 
-    setListData(pokemonDetails)
-
+    setListData(pokemonDetails);
   } catch (error) {
-    console.log('ERRO LIST: ', error?.data);
+    console.log("ERRO LIST: ", error?.data);
   }
-
-}
+};
 
 export const getPokemonDetails = async (pokemonName) => {
   try {
-    const response = await axios.get(`${base_url}/pokemon/${pokemonName}`)
+    const response = await axios.get(`${base_url}/pokemon/${pokemonName}`);
 
     const resposta = {
       nome: pokemonName,
       tipo: response.data.types[0].type.name,
       tamanho: response.data.height,
       peso: response.data.weight,
-      url: response.data.sprites.front_default
-    }
+      url: response.data.sprites.front_default,
+    };
 
     // console.log('Detalhes do pokemon: ', resposta);
-    return resposta
-
+    return resposta;
   } catch (error) {
-    console.log('ERRO CATCH: ', error);
+    console.log("ERRO CATCH: ", error);
   }
-}
+};
 
 // export const getNextPagePokemonList = async (setData) => {
 //   try {
@@ -62,3 +63,12 @@ export const getPokemonDetails = async (pokemonName) => {
 //   }
 
 // }
+const getPokemon = () => {
+  axios
+    .get(`https://pokeapi.co/api/v2/pokemon/bulbasaur`)
+    .then((response) => {
+      console.log(`DIFERENTE: ${response}`);
+    })
+    .catch((err) => console.log(err));
+};
+getPokemon();

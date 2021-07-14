@@ -9,6 +9,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./themes";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import { getPokemonList } from "./requests/pokemonAPI";
+import ComponentFooter from "./pages/Footer";
 
 function App() {
   const [pokedex, setPokedex] = useState([]);
@@ -17,24 +18,27 @@ function App() {
   const [previousPageURL, setPreviousPageURL] = useState(null);
 
   useEffect(() => {
-    getPokemonList('/pokemon', setPokemons, setPreviousPageURL, setNextPageURL)
-  }, [])
+    getPokemonList("/pokemon", setPokemons, setPreviousPageURL, setNextPageURL);
+  }, []);
 
   const goToNextPage = () => {
-    let path = nextPageURL.split('v2')
-    path = path[1]
+    let path = nextPageURL.split("v2");
+    path = path[1];
 
-    getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL)
-  }
+    getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL);
+  };
 
   const goToPreviousPage = () => {
     if (previousPageURL) {
-      let path = previousPageURL.split('v2')
-      path = path[1]
 
-      getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL)
+
+      let path = previousPageURL.split("v2");
+      path = path[1];
+
+      getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL);
+
     }
-  }
+  };
 
   return (
     <div>
