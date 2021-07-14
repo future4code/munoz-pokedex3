@@ -96,7 +96,8 @@ export const BgCurve2Left = styled.div`
 `;
 
 export const Curve1Left = styled.div`
-  width: 201px;
+  z-index: 1;
+  width: 235px;
   height: 85px;
   background-color: #8b0000;
   float: left;
@@ -274,7 +275,7 @@ export const Junction2 = styled.div`
 
 export const Screen = styled.div`
   height: 245px;
-  width: 260px;
+  /* width: 260px; */
   padding: 0 20px;
   background-color: #b0b0b0;
   float: left;
