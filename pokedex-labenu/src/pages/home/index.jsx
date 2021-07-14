@@ -1,77 +1,32 @@
 import { useHistory } from "react-router-dom";
-import React, { useState } from "react";
-import styled from "styled-components";
-import { HeaderAppBar, HeaderLogo } from "./style";
-import { HeaderToolbar } from "./style";
+import React from "react";
+import {
+  Arrows,
+  ButtonCard,
+  CardsContainer,
+  ContainerButton,
+  ContainerNomeBotão,
+  HeaderAppBar,
+  HeaderLogo,
+  PokemonContainer,
+  PokemonImage,
+  HeaderToolbar,
+} from "./style";
 import { Container } from "@material-ui/core";
 import { Button } from "@material-ui/core";
-import Logo from "../../img/pokebola-logo3.png";
-
-const CardsContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 20px 0 50px;
-`;
-
-const PokemonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #353d51;
-  margin: 25px;
-  padding-top: 30px;
-  max-width: 20vw;
-  height: 50vh;
-  color: white;
-  border-radius: 10px;
-  box-shadow: 1em 1em 1em 1em rgba(36, 36, 36, 0.404);
-`;
-const ContainerNomeBotão = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #2b3042;
-  box-shadow: 0em 0em 0em 0em rgba(36, 36, 36, 0.144);
-  width: 20vw;
-  margin-top: 20px;
-  padding-bottom: 38px;
-  padding-top: 25px;
-  border-radius: 10px;
-`;
-
-const PokemonImage = styled.img`
-  width: 10vw;
-`;
-
-const ButtonCard = styled.button`
-  width: 8vw;
-  font-size: 12px;
-  height: 6vh;
-  background-color: #a4bdfb;
-  :hover {
-    background-color: rgb(109, 125, 166);
-  }
-  margin-top: 10px;
-  border-radius: 8px;
-  border: none;
-  font-family: Poppins;
-`;
+import Logo from "../../assets/pokebola-logo3.png";
+import ArrowLeft from "../../assets/arrowLeft.png";
+import ArrowRight from "../../assets/arrowRight.png";
 
 export function Home(props) {
   const history = useHistory();
   const irParaPokedex = () => history.push("pokedex");
-  const detalhes = () => history.push("details");
+  // const detalhes = () => history.push("details");
 
   const addPokedex = (pokemon) => {
-
     const newPokedex = [...props.pokedex, pokemon];
     props.setPokedex(newPokedex);
   };
-
 
   return (
     <div>
@@ -83,15 +38,16 @@ export function Home(props) {
           </Button>
         </HeaderToolbar>
       </HeaderAppBar>
-      <button onClick={detalhes}>Detalhes</button>
-      <button onClick={props.goToPreviousPage}>Página Anterior</button>
-      <button onClick={props.goToNextPage}>Próxima Página</button>
-
+      {/* <button onClick={detalhes}>Detalhes</button> */}
+      <ContainerButton>
+        <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />
+        <Arrows src={ArrowRight} onClick={props.goToNextPage} />
+      </ContainerButton>
       <Container>
         <CardsContainer>
           {props.pokemons.map((pokemon) => {
             return (
-              <PokemonContainer>
+              <PokemonContainer backgroundColor={pokemon.tipo}>
                 <PokemonImage src={pokemon.url} alt="pokemon" />
                 <ContainerNomeBotão>
                   <h2>{pokemon.nome}</h2>
@@ -104,6 +60,10 @@ export function Home(props) {
             );
           })}
         </CardsContainer>
+        <ContainerButton>
+          <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />
+          <Arrows src={ArrowRight} onClick={props.goToNextPage} />
+        </ContainerButton>
       </Container>
     </div>
   );
