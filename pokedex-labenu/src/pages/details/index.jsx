@@ -5,7 +5,7 @@ import { getPokemonList } from "../../requests/pokemonAPI";
 export function Details() {
   const history = useHistory();
   const voltar = () => history.push("pokedex");
-  const procurarMaisPokemons = () => history.push("home");
+  const procurarMaisPokemons = () => history.push("");
   return (
     <div>
       Detalhes!

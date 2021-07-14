@@ -18,8 +18,10 @@ import Header from "../../Components/Header";
 
 export function Home(props) {
   const history = useHistory();
+  const game = () => history.push("game");
   const changePage = (path) => history.push(path);
   // const detalhes = () => history.push("details");
+
 
   const addPokedex = (pokemon) => {
     const newPokedex = [...props.pokedex, pokemon];
@@ -28,12 +30,18 @@ export function Home(props) {
 
   return (
     <div>
+
+      
+      
+
+
       <Header />
-      {/* <button onClick={detalhes}>Detalhes</button> */}
+      <button onClick={game}>Jogue agora!</button>
       <ContainerButton>
         <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />
         <Arrows src={ArrowRight} onClick={props.goToNextPage} />
       </ContainerButton>
+
       <Container>
         <CardsContainer>
           {props.pokemons.map((pokemon) => {

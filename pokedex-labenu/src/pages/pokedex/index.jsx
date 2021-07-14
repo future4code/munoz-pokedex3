@@ -64,7 +64,7 @@ export function Pokedex(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const history = useHistory();
-  const voltar = () => history.push("home");
+  const voltar = () => history.push("");
   const detalhes = () => history.push("details");
 
   const deletePokemon = (index) => {
