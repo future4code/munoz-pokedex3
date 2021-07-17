@@ -4,6 +4,8 @@ import { ImageContainer } from "./style.js";
 import { BackButton } from "./style.js";
 import { useHistory } from "react-router-dom";
 import { base_url } from "../../constants/api.js";
+import Header from "../../Components/Header/index.jsx";
+import ComponentFooter from "../Footer/index.jsx";
 
 const capFirstLetter = (string) => {
   return string.replace(string[0], string[0].toUpperCase());
@@ -34,12 +36,7 @@ export function Game() {
   useEffect(() => {
     if (pokemonsArray.length < 4) {
       setIsLoading(true);
-      fetch(
-        `${base_url}/pokemon/${randomIntegerNumber(
-          pokeApiLength,
-          1
-        )}`
-      )
+      fetch(`${base_url}/pokemon/${randomIntegerNumber(pokeApiLength, 1)}`)
         .then((response) => response.json())
         .then((response) => {
           setPokemonsArray((prevPokemons) => [...prevPokemons, response]);
@@ -48,7 +45,7 @@ export function Game() {
         .catch((error) => {
           alert(
             error +
-            ". Please reload the page and be sure to have internet connection."
+              ". Please reload the page and be sure to have internet connection."
           );
           setIsLoading(false);
         });
@@ -142,20 +139,24 @@ export function Game() {
   }
 
   return (
-    <GameContainer>
-      <BackButton onClick={backHome}>Voltar</BackButton>
-      <h1>Quem é esse Pokémon?</h1>
-      <ImageContainer>{pokemonImage}</ImageContainer>
-      <div className="options-container">{options}</div>
-      <button
-        className="try-another"
-        onClick={(event) => {
-          resetGame(event);
-        }}
-      >
-        Tente novamente
-      </button>
-    </GameContainer>
+    <>
+      <Header />
+      <GameContainer>
+        <BackButton onClick={backHome}>Voltar</BackButton>
+        <h1>Quem é esse Pokémon?</h1>
+        <ImageContainer>{pokemonImage}</ImageContainer>
+        <div className="options-container">{options}</div>
+        <button
+          className="try-another"
+          onClick={(event) => {
+            resetGame(event);
+          }}
+        >
+          Tente novamente
+        </button>
+      </GameContainer>
+      <ComponentFooter />
+    </>
   );
 }
 

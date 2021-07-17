@@ -10,6 +10,12 @@ export const CardsContainer = styled.div`
   margin: 20px 20px 0 50px;
 `;
 
+export const FlipContainer = styled.div`
+  :hover .flipper {
+    transform: rotateY(180deg);
+  }
+`;
+
 export const PokemonContainer = styled.div`
   display: flex;
   align-items: center;
@@ -65,14 +71,21 @@ export const PokemonContainer = styled.div`
   color: white;
   border-radius: 10px;
   box-shadow: 1em 1em 1em 1em rgba(36, 36, 36, 0.404);
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  position: relative;
 `;
+export const FrontFlipper = styled.div`
+  position: absolute;
+  backface-visibility: hidden;
+`;
+
 export const ContainerNomeBotão = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background-color: #2b3042;
-  box-shadow: 0em 0em 0em 0em rgba(36, 36, 36, 0.144);
   width: 20vw;
   margin-top: 20px;
   padding-bottom: 38px;
@@ -81,7 +94,8 @@ export const ContainerNomeBotão = styled.div`
 `;
 
 export const PokemonImage = styled.img`
-  width: 10vw;
+  /* width: 10vw; */
+  margin-left: 30%;
 `;
 
 export const ButtonCard = styled.button`
