@@ -16,7 +16,7 @@ function App() {
   const [pokemons, setPokemons] = useState([]);
   const [nextPageURL, setNextPageURL] = useState(null);
   const [previousPageURL, setPreviousPageURL] = useState(null);
-  console.log(`ESSE CONSOLE LOG: ${pokemons}`);
+  // console.log(`ESSE CONSOLE LOG: ${pokemons}`);
   useEffect(() => {
     getPokemonList("/pokemon", setPokemons, setPreviousPageURL, setNextPageURL);
   }, []);

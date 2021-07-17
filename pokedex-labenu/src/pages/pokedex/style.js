@@ -1,7 +1,17 @@
 import styled from "styled-components";
 import { darkRed } from "../../constants/colors";
 
-export const MyPokedex = styled.div`
+
+
+
+export const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`
+
+
+  export const MyPokedex = styled.div`
   width: 750px;
   margin: 50px auto 0 auto;
 
@@ -325,6 +335,7 @@ export const Picture = styled.div`
   width: 254px;
   margin-top: 20px;
   margin-bottom: 9px;
+  padding: 10px 0;
   background-color: #fff;
   border: 3px solid #494949;
   clear: both;
@@ -337,6 +348,7 @@ export const Picture = styled.div`
   img {
     display: block;
     margin: 0 auto;
+    max-height: 100%;
   }
 `;
 
@@ -600,6 +612,7 @@ export const StatsScreen = styled.div`
   z-index: 1;
   font-size: 18px;
   font-family: "VT323", monospace;
+  overflow-y: auto;
 
   position: absolute;
   top: 130px;

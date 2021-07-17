@@ -18,6 +18,7 @@ import ArrowLeft from "../../assets/arrowLeft.png";
 import ArrowRight from "../../assets/arrowRight.png";
 import ComponentFooter from "../Footer";
 import Header from "../../Components/Header";
+import { translateType } from "../../services/formatDataPokemons";
 
 export function Home(props) {
   // const history = useHistory();
@@ -29,7 +30,7 @@ export function Home(props) {
     if (flippedCardId === id) {
       return setFlippedCardId('')
     }
-      setFlippedCardId(id)
+    setFlippedCardId(id)
   }
 
   const addPokedex = (pokemon, index) => {
@@ -50,8 +51,8 @@ export function Home(props) {
   }).map((pokemon, index) => {
     return (
       <Card>
-        <FlipContainer 
-        className="flip-container" 
+        <FlipContainer
+          className="flip-container"
         >
           <PokemonContainer
             flippedCardId={flippedCardId}
@@ -63,14 +64,15 @@ export function Home(props) {
           >
             <FrontFlipper className="front">
               <PokemonImage
-                src={pokemon.url}
+                src={pokemon.url.gif_front_default}
                 alt="pokemon"
                 width="110px"
                 height="110px"
               />
               <ContainerNomeBotão>
                 <h2>{pokemon.nome}</h2>
-                <p>{pokemon.tipo}</p>
+                {/* {pokemon.formas.map((forma) => {return <p>{forma.name}</p>})} */}
+                <p>{translateType(pokemon.tipo[0].type.name)}</p>
                 <ButtonCard onClick={() => addPokedex(pokemon)}>
                   {/* {adicionou ? "Remover" : "Adicionar"} */}
                   Adicionar à Pokedex
