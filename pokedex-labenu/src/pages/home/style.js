@@ -10,10 +10,17 @@ export const CardsContainer = styled.div`
   margin: 20px 20px 0 50px;
 `;
 
+
+export const Card = styled.div`
+
+`
+
 export const FlipContainer = styled.div`
-  :hover .flipper {
+  width: 80%;
+  
+  /* :hover .flipper {
     transform: rotateY(180deg);
-  }
+  } */
 `;
 
 export const PokemonContainer = styled.div`
@@ -74,6 +81,9 @@ export const PokemonContainer = styled.div`
   transform-style: preserve-3d;
   transition: transform 0.8s;
   position: relative;
+  cursor: pointer;
+
+  transform: ${props => (props.flippedCardId === props.pokemonId) ? 'rotateY(180deg)' : 'none'}
 `;
 export const FrontFlipper = styled.div`
   position: absolute;

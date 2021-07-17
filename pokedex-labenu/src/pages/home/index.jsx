@@ -1,8 +1,9 @@
 // import { useHistory } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import {
   Arrows,
   ButtonCard,
+  Card,
   CardsContainer,
   ContainerButton,
   ContainerNomeBotão,
@@ -17,11 +18,19 @@ import ArrowLeft from "../../assets/arrowLeft.png";
 import ArrowRight from "../../assets/arrowRight.png";
 import ComponentFooter from "../Footer";
 import Header from "../../Components/Header";
-// import { useState } from "react";
 
 export function Home(props) {
   // const history = useHistory();
   // const changePage = (path) => history.push(path);
+
+  const [flippedCardId, setFlippedCardId] = useState('')
+
+  const flipCard = (id) => {
+    if (flippedCardId === id) {
+      return setFlippedCardId('')
+    }
+      setFlippedCardId(id)
+  }
 
   const addPokedex = (pokemon, index) => {
     const newPokedex = [...props.pokedex, pokemon];
@@ -32,18 +41,22 @@ export function Home(props) {
     }
   };
 
-  const filteredPokemons = props.pokemons
-    .filter((pokemon) => {
-      const isAddedPokedex = props.pokedex.includes(pokemon);
-      if (isAddedPokedex) {
-        return false;
-      }
-      return true;
-    })
-    .map((pokemon, index) => {
-      return (
-        <FlipContainer className="flip-container">
+  const filteredPokemons = props.pokemons.filter((pokemon) => {
+    const isAddedPokedex = props.pokedex.includes(pokemon)
+    if (isAddedPokedex) {
+      return false
+    }
+    return true
+  }).map((pokemon, index) => {
+    return (
+      <Card>
+        <FlipContainer 
+        className="flip-container" 
+        >
           <PokemonContainer
+            flippedCardId={flippedCardId}
+            pokemonId={pokemon.id}
+            onClick={() => flipCard(pokemon.id)}
             className="flipper"
             backgroundColor={pokemon.tipo}
             key={index}
@@ -64,11 +77,15 @@ export function Home(props) {
                 </ButtonCard>
               </ContainerNomeBotão>
             </FrontFlipper>
-            <div className="back"></div>
+            <div className="back">
+            </div>
           </PokemonContainer>
         </FlipContainer>
-      );
-    });
+      </Card>
+
+    );
+  })
+
 
   return (
     <div>
