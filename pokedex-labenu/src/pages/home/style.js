@@ -74,7 +74,7 @@ export const PokemonContainer = styled.div`
   margin: 25px;
   padding-top: 30px;
   max-width: 20vw;
-  height: 36vh;
+  height: 48vh;
   color: white;
   border-radius: 10px;
   box-shadow: 1em 1em 1em 1em rgba(36, 36, 36, 0.404);
@@ -91,11 +91,15 @@ export const FrontFlipper = styled.div`
 `;
 
 export const BackFlipper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   transform: rotateY( 180deg );
   backface-visibility: hidden;
 
   p {
-    font-size: 18px;
+    font-size: 22px;
   }
 `;
 
@@ -106,7 +110,7 @@ export const ContainerTitle = styled.div`
   flex-direction: column;
   background-color: #2b3042;
   width: 13vw;
-  height: 10vh;
+  height: 22vh;
   margin-top: 48px;
   border-radius: 10px;
 `;

@@ -71,22 +71,27 @@ export function Home(props) {
               />
               <ContainerTitle>
                 <h2>{pokemon.nome}</h2>
+                <p>{pokemon.tipo}</p>
+                <ButtonCard onClick={() => addPokedex(pokemon)}>
+                  {/* {adicionou ? "Remover" : "Adicionar"} */}
+                  Adicionar à Pokedex
+                </ButtonCard>
               </ContainerTitle>
             </FrontFlipper>
             <BackFlipper className="back">
               <p>Pokémon nº: {pokemon.id}</p>
-              <p>Peso: {pokemon.peso}</p>
-              <p>Tamanho: {pokemon.tamanho}</p>
-              <p>Tipo: {pokemon.tipo}</p>
-              <ButtonCard onClick={() => addPokedex(pokemon)}>
-                {/* {adicionou ? "Remover" : "Adicionar"} */}
-                Adicionar à Pokedex
-              </ButtonCard>
+              <p>Habilidade Principal:</p>
+              <p>{pokemon.habilidade}</p>
+              <p>hp: {pokemon.hp}</p>
+              <p>ataque: {pokemon.ataque}</p>
+              <p>defesa: {pokemon.defesa}</p>
+              <p>ataque especial: {pokemon.ataqueS}</p>
+              <p>defesa especial: {pokemon.defesaS}</p>
+              <p>velocidade: {pokemon.velocidade}</p>
             </BackFlipper>
           </PokemonContainer>
         </FlipContainer>
       </Card>
-
     );
   })
 
