@@ -37,7 +37,7 @@ export function Home(props) {
     props.setPokedex(newPokedex);
 
     if (filteredPokemons.length === 1) {
-      props.goToNextPage()
+      props.goToNextPage();
     }
   };
 
@@ -87,7 +87,6 @@ export function Home(props) {
   })
 
 
-
   return (
     <div>
       <Header />
@@ -96,9 +95,7 @@ export function Home(props) {
         <Arrows src={ArrowRight} onClick={props.goToNextPage} />
       </ContainerButton>
       <Container>
-        <CardsContainer>
-          {filteredPokemons}
-        </CardsContainer>
+        <CardsContainer>{filteredPokemons}</CardsContainer>
         <ContainerButton>
           <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />
           <Arrows src={ArrowRight} onClick={props.goToNextPage} />
