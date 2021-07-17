@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { AppBar, Toolbar } from "@material-ui/core";
+import { AppBar, Toolbar, Button } from "@material-ui/core";
 
 export const HeaderAppBar = styled(AppBar)`
   background-color: ${(props) => props.theme.main};
@@ -12,4 +12,9 @@ export const HeaderToolbar = styled(Toolbar)`
 `;
 export const HeaderLogo = styled.img`
   width: 3vw;
+`;
+export const Buttons = styled(Button)`
+  && {
+    margin-left: 70%;
+  }
 `;

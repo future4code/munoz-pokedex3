@@ -36,10 +36,11 @@ export const getPokemonDetails = async (pokemonName) => {
       tipo: response.data.types[0].type.name,
       tamanho: response.data.height,
       peso: response.data.weight,
-      url: response.data.sprites.front_default,
+      url: response.data.sprites.versions["generation-v"]["black-white"]
+        .animated.front_default,
     };
 
-    // console.log('Detalhes do pokemon: ', resposta);
+    // console.log("Detalhes do pokemon: ", resposta.url);
     return resposta;
   } catch (error) {
     console.log("ERRO CATCH: ", error);
@@ -66,7 +67,7 @@ export const getPokemonDetails = async (pokemonName) => {
 // }
 const getPokemon = () => {
   axios
-    .get(`https://pokeapi.co/api/v2/pokemon/bulbasaur`)
+    .get(`https://pokeapi.co/api/v2/pokemon/`)
     .then((response) => {
       console.log(`DIFERENTE: ${response}`);
     })
