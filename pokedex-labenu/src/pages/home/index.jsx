@@ -26,14 +26,39 @@ export function Home(props) {
   const addPokedex = (pokemon) => {
     const newPokedex = [...props.pokedex, pokemon];
     props.setPokedex(newPokedex);
+    if (filteredPokemons.length === 1) {
+      props.goToNextPage()
+    }
   };
+
+  const filteredPokemons =  props.pokemons.filter((pokemon) => {
+    const isAddedPokedex = props.pokedex.includes(pokemon)
+    if (isAddedPokedex) {
+      return false
+    }
+    return true
+  }).map((pokemon) => {
+    return (
+      <PokemonContainer backgroundColor={pokemon.tipo}>
+        <PokemonImage src={pokemon.url} alt="pokemon" />
+        <ContainerNomeBotão>
+          <h2>{pokemon.nome}</h2>
+          <p>{pokemon.tipo}</p>
+          <ButtonCard onClick={() => addPokedex(pokemon)}>
+            Adicionar Pokedex
+          </ButtonCard>
+        </ContainerNomeBotão>
+      </PokemonContainer>
+    );
+  })
+
+  console.log('props.pokemons: ', props.pokemons);
+  console.log('props.pokedex: ', props.pokedex);
+
+
 
   return (
     <div>
-
-      
-      
-
 
       <Header />
       <button onClick={game}>Jogue agora!</button>
@@ -44,20 +69,7 @@ export function Home(props) {
 
       <Container>
         <CardsContainer>
-          {props.pokemons.map((pokemon) => {
-            return (
-              <PokemonContainer backgroundColor={pokemon.tipo}>
-                <PokemonImage src={pokemon.url} alt="pokemon" />
-                <ContainerNomeBotão>
-                  <h2>{pokemon.nome}</h2>
-                  <p>{pokemon.tipo}</p>
-                  <ButtonCard onClick={() => addPokedex(pokemon)}>
-                    Adicionar Pokedex
-                  </ButtonCard>
-                </ContainerNomeBotão>
-              </PokemonContainer>
-            );
-          })}
+          {filteredPokemons}
         </CardsContainer>
         <ContainerButton>
           <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />
