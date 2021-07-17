@@ -28,47 +28,47 @@ export function Home(props) {
     props.setPokedex(newPokedex);
 
     if (filteredPokemons.length === 1) {
-      props.goToNextPage()
+      props.goToNextPage();
     }
   };
 
-  const filteredPokemons =  props.pokemons.filter((pokemon) => {
-    const isAddedPokedex = props.pokedex.includes(pokemon)
-    if (isAddedPokedex) {
-      return false
-    }
-    return true
-  }).map((pokemon) => {
-    return (
-       <FlipContainer className="flip-container">
-                <PokemonContainer
-                  className="flipper"
-                  backgroundColor={pokemon.tipo}
-                  key={index}
-                >
-                  <FrontFlipper className="front">
-                    <PokemonImage
-                      src={pokemon.url}
-                      alt="pokemon"
-                      width="110px"
-                      height="110px"
-                    />
-                    <ContainerNomeBotão>
-                      <h2>{pokemon.nome}</h2>
-                      <p>{pokemon.tipo}</p>
-                      <ButtonCard onClick={() => addPokedex(pokemon)}>
-                        {/* {adicionou ? "Remover" : "Adicionar"} */}
-                        Adicionar à Pokedex
-                      </ButtonCard>
-                    </ContainerNomeBotão>
-                  </FrontFlipper>
-                  <div className="back"></div>
-                </PokemonContainer>
-              </FlipContainer>
-    );
-  })
-
-
+  const filteredPokemons = props.pokemons
+    .filter((pokemon) => {
+      const isAddedPokedex = props.pokedex.includes(pokemon);
+      if (isAddedPokedex) {
+        return false;
+      }
+      return true;
+    })
+    .map((pokemon, index) => {
+      return (
+        <FlipContainer className="flip-container">
+          <PokemonContainer
+            className="flipper"
+            backgroundColor={pokemon.tipo}
+            key={index}
+          >
+            <FrontFlipper className="front">
+              <PokemonImage
+                src={pokemon.url}
+                alt="pokemon"
+                width="110px"
+                height="110px"
+              />
+              <ContainerNomeBotão>
+                <h2>{pokemon.nome}</h2>
+                <p>{pokemon.tipo}</p>
+                <ButtonCard onClick={() => addPokedex(pokemon)}>
+                  {/* {adicionou ? "Remover" : "Adicionar"} */}
+                  Adicionar à Pokedex
+                </ButtonCard>
+              </ContainerNomeBotão>
+            </FrontFlipper>
+            <div className="back"></div>
+          </PokemonContainer>
+        </FlipContainer>
+      );
+    });
 
   return (
     <div>
@@ -78,9 +78,7 @@ export function Home(props) {
         <Arrows src={ArrowRight} onClick={props.goToNextPage} />
       </ContainerButton>
       <Container>
-        <CardsContainer>
-          {filteredPokemons}
-        </CardsContainer>
+        <CardsContainer>{filteredPokemons}</CardsContainer>
         <ContainerButton>
           <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />
           <Arrows src={ArrowRight} onClick={props.goToNextPage} />
