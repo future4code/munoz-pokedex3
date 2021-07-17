@@ -22,26 +22,25 @@ import Header from "../../Components/Header";
 export function Home(props) {
   // const history = useHistory();
   // const changePage = (path) => history.push(path);
-  // const [adicionou, setAdicionou] = useState(false);
 
   const addPokedex = (pokemon, index) => {
     const newPokedex = [...props.pokedex, pokemon];
     props.setPokedex(newPokedex);
-    // setAdicionou(!adicionou);
+
+    if (filteredPokemons.length === 1) {
+      props.goToNextPage()
+    }
   };
 
-  return (
-    <div>
-      <Header />
-      <ContainerButton>
-        <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />
-        <Arrows src={ArrowRight} onClick={props.goToNextPage} />
-      </ContainerButton>
-      <Container>
-        <CardsContainer>
-          {props.pokemons.map((pokemon, index) => {
-            return (
-              <FlipContainer className="flip-container">
+  const filteredPokemons =  props.pokemons.filter((pokemon) => {
+    const isAddedPokedex = props.pokedex.includes(pokemon)
+    if (isAddedPokedex) {
+      return false
+    }
+    return true
+  }).map((pokemon) => {
+    return (
+       <FlipContainer className="flip-container">
                 <PokemonContainer
                   className="flipper"
                   backgroundColor={pokemon.tipo}
@@ -66,8 +65,21 @@ export function Home(props) {
                   <div className="back"></div>
                 </PokemonContainer>
               </FlipContainer>
-            );
-          })}
+    );
+  })
+
+
+
+  return (
+    <div>
+      <Header />
+      <ContainerButton>
+        <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />
+        <Arrows src={ArrowRight} onClick={props.goToNextPage} />
+      </ContainerButton>
+      <Container>
+        <CardsContainer>
+          {filteredPokemons}
         </CardsContainer>
         <ContainerButton>
           <Arrows src={ArrowLeft} onClick={props.goToPreviousPage} />

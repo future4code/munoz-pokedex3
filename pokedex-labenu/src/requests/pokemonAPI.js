@@ -32,6 +32,7 @@ export const getPokemonDetails = async (pokemonName) => {
 
     const resposta = {
       nome: pokemonName,
+      id: response.data.id,
       tipo: response.data.types[0].type.name,
       tamanho: response.data.height,
       peso: response.data.weight,
