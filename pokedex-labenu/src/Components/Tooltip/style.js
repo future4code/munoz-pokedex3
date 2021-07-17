@@ -6,8 +6,8 @@ export const ToolTipContainer = styled.div`
   ::before,
   ::after {
     position: absolute;
-    top: -5rem;
-    left: 4%;
+    top: -4rem;
+    left: -20%;
     transform: translateX(-50%), translateY(-100%);
     transition: 150ms transform;
   }

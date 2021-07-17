@@ -9,14 +9,14 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./themes";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import { getPokemonList } from "./requests/pokemonAPI";
-import ComponentFooter from "./pages/Footer";
+// import ComponentFooter from "./pages/Footer";
 
 function App() {
   const [pokedex, setPokedex] = useState([]);
   const [pokemons, setPokemons] = useState([]);
   const [nextPageURL, setNextPageURL] = useState(null);
   const [previousPageURL, setPreviousPageURL] = useState(null);
-
+  console.log(`ESSE CONSOLE LOG: ${pokemons}`);
   useEffect(() => {
     getPokemonList("/pokemon", setPokemons, setPreviousPageURL, setNextPageURL);
   }, []);
@@ -30,17 +30,12 @@ function App() {
 
   const goToPreviousPage = () => {
     if (previousPageURL) {
-
-
-
       let path = previousPageURL.split("v2");
       path = path[1];
 
       getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL);
-
     }
   };
-
 
   return (
     <div>
@@ -50,10 +45,7 @@ function App() {
           <BrowserRouter>
             <Switch>
               <Route exact path={"/pokedex"}>
-                <Pokedex
-                  pokedex={pokedex}
-                  setPokedex={setPokedex}
-                />
+                <Pokedex pokedex={pokedex} setPokedex={setPokedex} />
               </Route>
               <Route exact path={"/details"}>
                 <Details />
@@ -80,7 +72,6 @@ function App() {
 }
 
 export default App;
-
 
 // [
 //   {
