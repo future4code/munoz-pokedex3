@@ -1,8 +1,9 @@
 // import { useHistory } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import {
   Arrows,
   ButtonCard,
+  Card,
   CardsContainer,
   ContainerButton,
   ContainerNomeBotão,
@@ -17,11 +18,19 @@ import ArrowLeft from "../../assets/arrowLeft.png";
 import ArrowRight from "../../assets/arrowRight.png";
 import ComponentFooter from "../Footer";
 import Header from "../../Components/Header";
-// import { useState } from "react";
 
 export function Home(props) {
   // const history = useHistory();
   // const changePage = (path) => history.push(path);
+
+  const [flippedCardId, setFlippedCardId] = useState('')
+
+  const flipCard = (id) => {
+    if (flippedCardId === id) {
+      return setFlippedCardId('')
+    }
+      setFlippedCardId(id)
+  }
 
   const addPokedex = (pokemon, index) => {
     const newPokedex = [...props.pokedex, pokemon];
@@ -32,39 +41,48 @@ export function Home(props) {
     }
   };
 
-  const filteredPokemons =  props.pokemons.filter((pokemon) => {
+  const filteredPokemons = props.pokemons.filter((pokemon) => {
     const isAddedPokedex = props.pokedex.includes(pokemon)
     if (isAddedPokedex) {
       return false
     }
     return true
-  }).map((pokemon) => {
+  }).map((pokemon, index) => {
     return (
-       <FlipContainer className="flip-container">
-                <PokemonContainer
-                  className="flipper"
-                  backgroundColor={pokemon.tipo}
-                  key={index}
-                >
-                  <FrontFlipper className="front">
-                    <PokemonImage
-                      src={pokemon.url}
-                      alt="pokemon"
-                      width="110px"
-                      height="110px"
-                    />
-                    <ContainerNomeBotão>
-                      <h2>{pokemon.nome}</h2>
-                      <p>{pokemon.tipo}</p>
-                      <ButtonCard onClick={() => addPokedex(pokemon)}>
-                        {/* {adicionou ? "Remover" : "Adicionar"} */}
-                        Adicionar à Pokedex
-                      </ButtonCard>
-                    </ContainerNomeBotão>
-                  </FrontFlipper>
-                  <div className="back"></div>
-                </PokemonContainer>
-              </FlipContainer>
+      <Card>
+        <FlipContainer 
+        className="flip-container" 
+        >
+          <PokemonContainer
+            flippedCardId={flippedCardId}
+            pokemonId={pokemon.id}
+            onClick={() => flipCard(pokemon.id)}
+            className="flipper"
+            backgroundColor={pokemon.tipo}
+            key={index}
+          >
+            <FrontFlipper className="front">
+              <PokemonImage
+                src={pokemon.url}
+                alt="pokemon"
+                width="110px"
+                height="110px"
+              />
+              <ContainerNomeBotão>
+                <h2>{pokemon.nome}</h2>
+                <p>{pokemon.tipo}</p>
+                <ButtonCard onClick={() => addPokedex(pokemon)}>
+                  {/* {adicionou ? "Remover" : "Adicionar"} */}
+                  Adicionar à Pokedex
+                </ButtonCard>
+              </ContainerNomeBotão>
+            </FrontFlipper>
+            <div className="back">
+            </div>
+          </PokemonContainer>
+        </FlipContainer>
+      </Card>
+
     );
   })
 
