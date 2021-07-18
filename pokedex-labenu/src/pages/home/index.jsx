@@ -78,15 +78,15 @@ export function Home(props) {
               </ContainerTitle>
             </FrontFlipper>
             <BackFlipper className="back">
-              <p>Pokémon nº: {pokemon.id}</p>
-              <p>Habilidade Principal:</p>
-              <p>{pokemon.habilidade}</p>
-              <p>hp: {pokemon.hp}</p>
-              <p>ataque: {pokemon.ataque}</p>
-              <p>defesa: {pokemon.defesa}</p>
-              <p>ataque especial: {pokemon.ataqueS}</p>
-              <p>defesa especial: {pokemon.defesaS}</p>
-              <p>velocidade: {pokemon.velocidade}</p>
+              <h2>Pokémon nº: {pokemon.id}</h2>
+              <div>
+                <p>{pokemon.nome}</p>
+                <p>tipo: {translateType(pokemon.tipo[0].type.name)}</p>
+                <p>Habilidade: {pokemon.habilidade}</p>
+                <p>hp: {pokemon.hp}</p>
+                <p>ataque: {pokemon.ataque}</p>
+                <p>defesa: {pokemon.defesa}</p>
+              </div>
             </BackFlipper>
           </PokemonContainer>
         </FlipContainer>

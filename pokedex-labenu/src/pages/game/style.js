@@ -10,7 +10,7 @@ export const GameContainer = styled.body`
 		margin-top: 0;
 		padding: 15px;
 		width: 100%;
-		background-color: #30344c;
+		background-color: #EE0815;
 		color: #ffffff;
 	}
 
@@ -140,4 +140,19 @@ export const BackButton = styled.button`
 	position: absolute;
 	top: 15px;
 	left: 25px;
+`
+export const Credits = styled.div`
+	padding-top: 40px;
+	margin-left: 15px;
+
+	a {
+    color: #0060B6;
+    text-decoration: none;
+	}
+
+	a:hover {
+			color:#00A0C6; 
+			text-decoration:none; 
+			cursor:pointer;  
+	}
 `

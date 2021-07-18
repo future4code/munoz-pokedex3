@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GameContainer } from "./style.js";
 import { ImageContainer } from "./style.js";
 import { BackButton } from "./style.js";
+import { Credits } from "./style.js";
 import { useHistory } from "react-router-dom";
 import { base_url } from "../../constants/api.js";
 import Header from "../../Components/Header/index.jsx";
@@ -45,7 +46,7 @@ export function Game() {
         .catch((error) => {
           alert(
             error +
-              ". Please reload the page and be sure to have internet connection."
+            ". Please reload the page and be sure to have internet connection."
           );
           setIsLoading(false);
         });
@@ -155,6 +156,9 @@ export function Game() {
           Tente novamente
         </button>
       </GameContainer>
+      <Credits>
+        Originalmente desenvolvido por <a target="_blank" href="https://github.com/alanriaho/PokemonGame">Alanriaho</a>
+      </Credits>
       <ComponentFooter />
     </>
   );
