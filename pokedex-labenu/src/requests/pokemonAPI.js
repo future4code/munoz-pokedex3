@@ -33,7 +33,7 @@ export const getPokemonDetails = async (pokemonName) => {
   try {
     const response = await axios.get(`${base_url}/pokemon/${pokemonName}`);
 
-    const resposta = {
+    const pokemonData = {
       nome: pokemonName,
       id: response.data.id,
 
@@ -67,17 +67,19 @@ export const getPokemonDetails = async (pokemonName) => {
       velocidade: response.data.stats[5].base_stat,
     };
 
-    return resposta;
+    return pokemonData;
   } catch (error) {
-    console.log("ERRO CATCH: ", error);
+    console.error(error);
   }
 };
 
 export const getLocations = async (id) => {
   try {
-    const locais = await axios.get(`${base_url}/pokemon/${id}/encounters`);
-    return locais;
-  } catch (error) {}
+    const locals = await axios.get(`${base_url}/pokemon/${id}/encounters`);
+    return locals;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const getCharacteristics = async (id) => {
@@ -86,6 +88,6 @@ export const getCharacteristics = async (id) => {
 
     return characteristics;
   } catch (error) {
-    console.log("ERRO LOCAIS: ", error);
+    console.error(error);
   }
 };

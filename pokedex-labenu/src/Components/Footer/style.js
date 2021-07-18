@@ -25,7 +25,6 @@ export const Seções = styled.h2`
 export const ContainerSeções = styled.div`
   width: 20vw;
 `;
-export const DesenvolvidoPor = styled.p``;
 export const ContainerDesenvolvidoPor = styled.div`
   display: flex;
   align-items: center;

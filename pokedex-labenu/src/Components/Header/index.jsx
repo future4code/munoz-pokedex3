@@ -8,7 +8,6 @@ import { Buttons } from "./style";
 
 export default function Header() {
   const history = useHistory();
-  const game = () => history.push("game");
   const changePage = (path) => history.push(path);
   return (
     <div>
@@ -23,7 +22,11 @@ export default function Header() {
           >
             Pokedex
           </Buttons>
-          <Button variant="contained" color="secondary" onClick={game}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => changePage("game")}
+          >
             Jogue agora!
           </Button>
         </HeaderToolbar>

@@ -1,7 +1,6 @@
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Pokedex from "./pages/pokedex";
-import Details from "./pages/details";
 import Home from "./pages/home";
 import Game from "./pages/game";
 import GlobalStyle from "./globals/GlobalStyles/GlobalStyles";
@@ -15,7 +14,7 @@ function App() {
   const [pokemons, setPokemons] = useState([]);
   const [nextPageURL, setNextPageURL] = useState(null);
   const [previousPageURL, setPreviousPageURL] = useState(null);
-  
+
   useEffect(() => {
     getPokemonList("/pokemon", setPokemons, setPreviousPageURL, setNextPageURL);
   }, []);
@@ -46,9 +45,7 @@ function App() {
               <Route exact path={"/pokedex"}>
                 <Pokedex pokedex={pokedex} setPokedex={setPokedex} />
               </Route>
-              <Route exact path={"/details"}>
-                <Details />
-              </Route>
+
               <Route exact path={"/"}>
                 <Home
                   pokemons={pokemons}

@@ -5,13 +5,11 @@ export const CardsContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   justify-content: center;
-  margin: 20px 20px 0 50px;
 `;
-
-export const Card = styled.div``;
 
 export const FlipContainer = styled.div`
   width: 80%;
+  justify-self: center;
 `;
 
 export const PokemonContainer = styled.div`
@@ -102,7 +100,7 @@ export const BackFlipper = styled.div`
   flex-direction: column;
   transform: rotateY(180deg);
   backface-visibility: hidden;
-
+  color: #30344c;
   p {
     font-size: 20px;
   }
@@ -138,4 +136,5 @@ export const ContainerButton = styled.div`
 export const Arrows = styled.img`
   width: 3vw;
   margin: 35px 12px 0 12px;
+  cursor: pointer;
 `;
