@@ -15,6 +15,7 @@ function App() {
   const [pokemons, setPokemons] = useState([]);
   const [nextPageURL, setNextPageURL] = useState(null);
   const [previousPageURL, setPreviousPageURL] = useState(null);
+  
   useEffect(() => {
     getPokemonList("/pokemon", setPokemons, setPreviousPageURL, setNextPageURL);
   }, []);
@@ -34,8 +35,6 @@ function App() {
       getPokemonList(path, setPokemons, setPreviousPageURL, setNextPageURL);
     }
   };
-
-  console.log("pokemons", pokemons)
 
   return (
     <div>
@@ -72,34 +71,3 @@ function App() {
 }
 
 export default App;
-
-// [
-//   {
-//     nome: "Pikachu",
-//     tipo: "Elétrico",
-//     tamanho: "40cm",
-//     peso: "35kg",
-//     url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
-//   },
-//   {
-//     nome: "Charmander",
-//     tipo: "Fogo",
-//     tamanho: "55cm",
-//     peso: "45kg",
-//     url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png"
-//   },
-//   {
-//     nome: "Squirtle",
-//     tipo: "Água",
-//     tamanho: "45cm",
-//     peso: "70kg",
-//     url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png"
-//   },
-//   {
-//     nome: "Bulbassauro",
-//     tipo: "Planta",
-//     tamanho: "30cm",
-//     peso: "50kg",
-//     url: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
-//   }
-// ]

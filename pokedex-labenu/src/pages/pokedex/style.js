@@ -1,7 +1,17 @@
 import styled from "styled-components";
 import { darkRed } from "../../constants/colors";
 
-export const MyPokedex = styled.div`
+
+
+
+export const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`
+
+
+  export const MyPokedex = styled.div`
   width: 750px;
   margin: 50px auto 0 auto;
 
@@ -321,10 +331,14 @@ export const ButtonTopPicture = styled.div`
 `;
 
 export const Picture = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 175px;
   width: 254px;
   margin-top: 20px;
   margin-bottom: 9px;
+  padding: 10px 0;
   background-color: #fff;
   border: 3px solid #494949;
   clear: both;
@@ -337,6 +351,10 @@ export const Picture = styled.div`
   img {
     display: block;
     margin: 0 auto;
+    min-height: 130px;
+    max-height: 100%;
+    max-width: 100%;
+    
   }
 `;
 
@@ -600,6 +618,7 @@ export const StatsScreen = styled.div`
   z-index: 1;
   font-size: 18px;
   font-family: "VT323", monospace;
+  overflow-y: auto;
 
   position: absolute;
   top: 130px;
@@ -619,7 +638,10 @@ export const StatsScreen = styled.div`
 export const BlueButtonsContainer1 = styled.div`
   z-index: 1;
 
+  display: flex;
+  justify-content: space-evenly;
   position: absolute;
+  flex-wrap: wrap;
   top: 295px;
   left: 49px;
 `;
@@ -633,10 +655,10 @@ export const BlueButtonsContainer2 = styled.div`
 
 export const BlueButton = styled.div`
   height: 35px;
-  width: 45px;
+  width: 45%;
   background-color: #003300;
-  float: left;
-  margin-right: 7px;
+  /* float: left; */
+  /* margin-right: 7px; */
 
   border-radius: 10px;
   -webkit-border-radius: 10px;

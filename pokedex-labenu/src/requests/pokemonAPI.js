@@ -1,13 +1,10 @@
 import { RepeatOneSharp } from "@material-ui/icons";
 import axios from "axios";
 import { base_url } from "../constants/api";
+import { convertDecimetresToCm, convertHectogramsToKg } from "../services/formatDataPokemons";
 
-export const getPokemonList = async (
-  path,
-  setListData,
-  setPreviousPage,
-  setNextPage
-) => {
+export const getPokemonList = async (path, setListData, setPreviousPage, setNextPage) => {
+  // console.log('REQUEST LISTA POKEMONS');
   try {
     const pokemonList = await axios.get(`${base_url}${path}`);
 
@@ -23,22 +20,32 @@ export const getPokemonList = async (
 
     setListData(pokemonDetails);
   } catch (error) {
-    console.log("ERRO LIST: ", error?.data);
+    console.error(error.data);
+    // console.log("ERRO LIST: ", error?.data);
   }
 };
 
 export const getPokemonDetails = async (pokemonName) => {
+  console.log('REQUEST DETALHES POKEMONS');
   try {
     const response = await axios.get(`${base_url}/pokemon/${pokemonName}`);
 
     const resposta = {
       nome: pokemonName,
       id: response.data.id,
-      tipo: response.data.types[0].type.name,
-      tamanho: response.data.height,
-      peso: response.data.weight,
-      url: response.data.sprites.versions["generation-v"]["black-white"]
-        .animated.front_default,
+
+      tipo: response.data.types,
+      tamanho: convertDecimetresToCm(response.data.height),
+      peso: convertHectogramsToKg(response.data.weight),
+      url: {
+        artwork_front: response.data.sprites.other['official-artwork'].front_default,
+        gif_front_default: response.data.sprites.versions["generation-v"]["black-white"].animated.front_default,
+        gif_back_default: response.data.sprites.versions["generation-v"]["black-white"].animated.back_default,
+        gif_front_female: response.data.sprites.versions["generation-v"]["black-white"].animated.front_female,
+        gif_back_female: response.data.sprites.versions["generation-v"]["black-white"].animated.back_female,
+      },
+      habilidades: response.data.abilities,
+      formas: response.data.forms
       habilidade: response.data.abilities[0].ability.name,
       hp: response.data.stats[0].base_stat,
       ataque: response.data.stats[1].base_stat,
@@ -47,37 +54,33 @@ export const getPokemonDetails = async (pokemonName) => {
       defesaS: response.data.stats[4].base_stat,
       velocidade: response.data.stats[5].base_stat
     };
-    // console.log("Detalhes do pokemon: ", resposta.url);
+
     return resposta;
   } catch (error) {
     console.log("ERRO CATCH: ", error);
   }
 };
 
-// export const getNextPagePokemonList = async (setData) => {
-//   try {
-//     const pokemonList = await axios.get(`${base_url}/pokemon`)
+export const getLocations = async (id) => {
+  // if (id){
+    try {
+      const locais = await axios.get(`${base_url}/pokemon/${id}/encounters`);
+      return locais;
+    } catch (error) {
+      console.log("ERRO LOCAIS: ", error);
+    }
+  // }
+}
 
-//     const pokemonDetailsPromisses = pokemonList?.data.results.map((pokemon) => {
-//       return getPokemonDetails(pokemon.name)
-//     })
-
-//     const pokemonDetails = await Promise.all(pokemonDetailsPromisses)
-//     console.log('RESPOSTA: ', pokemonDetails);
-
-//     setData(pokemonDetails)
-
-//   } catch (error) {
-//     console.log('ERRO LIST: ', error?.data);
-//   }
-
-// }
-const getPokemon = () => {
-  axios
-    .get(`https://pokeapi.co/api/v2/pokemon/`)
-    .then((response) => {
-      console.log(`DIFERENTE: ${response}`);
-    })
-    .catch((err) => console.log(err));
-};
-getPokemon();
+export const getCharacteristics = async (id) => {
+  // if (id) {
+    try {
+      const characteristics = await axios.get(`${base_url}/characteristic/${id}`);
+  
+      // console.log("REQUISIÇÃO: ", characteristics.data)   
+      return characteristics;
+    } catch (error) {
+      console.log("ERRO LOCAIS: ", error);
+    }
+  // }
+}
