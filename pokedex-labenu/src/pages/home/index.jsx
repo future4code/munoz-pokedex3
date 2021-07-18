@@ -58,7 +58,7 @@ export function Home(props) {
             pokemonId={pokemon.id}
             onClick={() => flipCard(pokemon.id)}
             className="flipper"
-            backgroundColor={pokemon.tipo}
+            backgroundColor={translateType(pokemon.tipo[0].type.name)}
             key={index}
           >
             <FrontFlipper className="front">
@@ -93,6 +93,7 @@ export function Home(props) {
       </Card>
     );
   })
+
 
 
   return (

@@ -16,7 +16,6 @@ export const getPokemonList = async (path, setListData, setPreviousPage, setNext
     });
 
     const pokemonDetails = await Promise.all(pokemonDetailsPromisses);
-    console.log("RESPOSTA: ", pokemonDetails);
 
     setListData(pokemonDetails);
   } catch (error) {
@@ -26,7 +25,6 @@ export const getPokemonList = async (path, setListData, setPreviousPage, setNext
 };
 
 export const getPokemonDetails = async (pokemonName) => {
-  console.log('REQUEST DETALHES POKEMONS');
   try {
     const response = await axios.get(`${base_url}/pokemon/${pokemonName}`);
 
@@ -45,7 +43,7 @@ export const getPokemonDetails = async (pokemonName) => {
         gif_back_female: response.data.sprites.versions["generation-v"]["black-white"].animated.back_female,
       },
       habilidades: response.data.abilities,
-      formas: response.data.forms
+      formas: response.data.forms,
       habilidade: response.data.abilities[0].ability.name,
       hp: response.data.stats[0].base_stat,
       ataque: response.data.stats[1].base_stat,
@@ -77,7 +75,6 @@ export const getCharacteristics = async (id) => {
     try {
       const characteristics = await axios.get(`${base_url}/characteristic/${id}`);
   
-      // console.log("REQUISIÇÃO: ", characteristics.data)   
       return characteristics;
     } catch (error) {
       console.log("ERRO LOCAIS: ", error);

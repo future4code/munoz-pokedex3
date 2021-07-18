@@ -121,14 +121,14 @@ export const ContainerTitle = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: #2b3042;
-//   width: 19vw;
-//   margin-top: 20px;
-//   padding-bottom: 38px;
-//   padding-top: 25px;
+  width: 19vw;
+  margin-top: 20px;
+  padding-bottom: 38px;
+  padding-top: 25px;
 
-  width: 13vw;
+  /* width: 13vw;
   height: 22vh;
-  margin-top: 48px;
+  margin-top: 48px; */
   
   border-radius: 10px;
 `;
