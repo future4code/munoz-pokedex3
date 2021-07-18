@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { translateType } from "../../services/formatDataPokemons";
 import { getCharacteristics, getLocations } from "../../requests/pokemonAPI";
-import ComponentFooter from "../Footer";
+import ComponentFooter from "../../Components/Footer";
 import Header from "../../Components/Header";
 import ArtworkIcon from "../../assets/artwork-icon.png";
 import {

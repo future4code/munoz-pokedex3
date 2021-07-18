@@ -14,7 +14,7 @@ import {
 import { Container } from "@material-ui/core";
 import ArrowLeft from "../../assets/arrowLeft.png";
 import ArrowRight from "../../assets/arrowRight.png";
-import ComponentFooter from "../Footer";
+import ComponentFooter from "../../Components/Footer";
 import Header from "../../Components/Header";
 import { translateType } from "../../services/formatDataPokemons";
 
