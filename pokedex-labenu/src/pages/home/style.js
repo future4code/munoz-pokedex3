@@ -85,7 +85,7 @@ export const PokemonContainer = styled.div`
   margin: 25px;
   padding-top: 30px;
   max-width: 20vw;
-  height: 50vh;
+  height: 48vh;
   color: white;
   border-radius: 10px;
   box-shadow: 1em 1em 1em 1em rgba(36, 36, 36, 0.404);
@@ -102,16 +102,34 @@ export const FrontFlipper = styled.div`
   backface-visibility: hidden;
 `;
 
-export const ContainerNomeBotão = styled.div`
+export const BackFlipper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: rotateY( 180deg );
+  backface-visibility: hidden;
+
+  p {
+    font-size: 22px;
+  }
+`;
+
+export const ContainerTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background-color: #2b3042;
-  width: 19vw;
-  margin-top: 20px;
-  padding-bottom: 38px;
-  padding-top: 25px;
+//   width: 19vw;
+//   margin-top: 20px;
+//   padding-bottom: 38px;
+//   padding-top: 25px;
+
+  width: 13vw;
+  height: 22vh;
+  margin-top: 48px;
+  
   border-radius: 10px;
 `;
 
@@ -128,10 +146,11 @@ export const ButtonCard = styled.button`
   :hover {
     background-color: rgb(109, 125, 166);
   }
-  margin-top: 10px;
+  margin-top: 32px;
   border-radius: 8px;
   border: none;
   font-family: Poppins;
+  cursor: pointer;
 `;
 
 export const ContainerButton = styled.div`

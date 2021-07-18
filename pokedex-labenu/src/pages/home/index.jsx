@@ -5,11 +5,12 @@ import {
   Card,
   CardsContainer,
   ContainerButton,
-  ContainerNomeBotão,
+  ContainerTitle,
   FlipContainer,
   FrontFlipper,
   PokemonContainer,
   PokemonImage,
+  BackFlipper
 } from "./style";
 
 import { Container } from "@material-ui/core";
@@ -25,8 +26,8 @@ export function Home(props) {
     if (flippedCardId === id) {
       return setFlippedCardId("");
     }
-    setFlippedCardId(id);
-  };
+    setFlippedCardId(id)
+  }
 
   const addPokedex = (pokemon, index) => {
     const newPokedex = [...props.pokedex, pokemon];
@@ -39,47 +40,58 @@ export function Home(props) {
     }
   };
 
-  const filteredPokemons = props.pokemons
-    .filter((pokemon) => {
-      const isAddedPokedex = props.pokedex.includes(pokemon);
-      if (isAddedPokedex) {
-        return false;
-      }
-      return true;
-    })
-    .map((pokemon, index) => {
-      return (
-        <Card>
-          <FlipContainer className="flip-container">
-            <PokemonContainer
-              flippedCardId={flippedCardId}
-              pokemonId={pokemon.id}
-              onClick={() => flipCard(pokemon.id)}
-              className="flipper"
-              backgroundColor={pokemon.tipo}
-              key={index}
-            >
-              <FrontFlipper className="front">
-                <PokemonImage
-                  src={pokemon.url}
-                  alt="pokemon"
-                  width="110px"
-                  height="110px"
-                />
-                <ContainerNomeBotão>
-                  <h2>{pokemon.nome}</h2>
-                  <p>{pokemon.tipo}</p>
-                  <ButtonCard onClick={() => addPokedex(pokemon)}>
-                    Adicionar à Pokedex
-                  </ButtonCard>
-                </ContainerNomeBotão>
-              </FrontFlipper>
-              <div className="back"></div>
-            </PokemonContainer>
-          </FlipContainer>
-        </Card>
-      );
-    });
+  const filteredPokemons = props.pokemons.filter((pokemon) => {
+    const isAddedPokedex = props.pokedex.includes(pokemon)
+    if (isAddedPokedex) {
+      return false
+    }
+    return true
+  }).map((pokemon, index) => {
+    return (
+      <Card>
+        <FlipContainer
+          className="flip-container"
+        >
+          <PokemonContainer
+            flippedCardId={flippedCardId}
+            pokemonId={pokemon.id}
+            onClick={() => flipCard(pokemon.id)}
+            className="flipper"
+            backgroundColor={pokemon.tipo}
+            key={index}
+          >
+            <FrontFlipper className="front">
+              <PokemonImage
+                src={pokemon.url}
+                alt="pokemon"
+                width="110px"
+                height="110px"
+              />
+              <ContainerTitle>
+                <h2>{pokemon.nome}</h2>
+                <p>{pokemon.tipo}</p>
+                <ButtonCard onClick={() => addPokedex(pokemon)}>
+                  Adicionar à Pokedex
+                </ButtonCard>
+              </ContainerTitle>
+            </FrontFlipper>
+            <BackFlipper className="back">
+              <p>Pokémon nº: {pokemon.id}</p>
+              <p>Habilidade Principal:</p>
+              <p>{pokemon.habilidade}</p>
+              <p>hp: {pokemon.hp}</p>
+              <p>ataque: {pokemon.ataque}</p>
+              <p>defesa: {pokemon.defesa}</p>
+              <p>ataque especial: {pokemon.ataqueS}</p>
+              <p>defesa especial: {pokemon.defesaS}</p>
+              <p>velocidade: {pokemon.velocidade}</p>
+            </BackFlipper>
+          </PokemonContainer>
+        </FlipContainer>
+      </Card>
+    );
+  })
+
 
   return (
     <div>

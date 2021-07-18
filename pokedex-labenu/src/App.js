@@ -35,6 +35,8 @@ function App() {
     }
   };
 
+  console.log("pokemons", pokemons)
+
   return (
     <div>
       <ThemeProvider theme={theme}>
