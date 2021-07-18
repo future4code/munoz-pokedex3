@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { translateType } from "../../services/formatDataPokemons";
-import { getCharacteristics, getLocations, getPokemonList } from "../../requests/pokemonAPI";
+import { getCharacteristics, getLocations } from "../../requests/pokemonAPI";
 import ComponentFooter from "../Footer";
 import Header from "../../Components/Header";
 import ArtworkIcon from "../../assets/artwork-icon.png"
-
 import {
   FrontImageButton, BackImageButton, BgCurve1Left, BgCurve2Left, ArtworkButton, DownArrow, DeleteButton, ButtonGlass, ButtonTopPicture, Cross, CrossMidCircle, Curve1Left, Curve2Left, DownTriangle, Junction, Junction1, Junction2, LeftArrow, LeftfTriangle, LeftSide, MiddleCross, MiniButtonGreen, MiniButtonRed, MiniButtonYellow, MyPokedex, Picture, Reflect, RightArrow, RightSide, RightTriangle, Screen, Speakers, UpArrow, TopPicture, UpTriangle, StatsScreen, BlueButtonsContainer1, BlueButton, MiniButtonOrange, MiniButtonDarkGreen, YellowBox1, YellowBox2, BgCurve1Right, BgCurve2Right, Curve1Right, Curve2Right, LogoDiv, PageContainer
 } from "./style";
 
-
-
 export function Pokedex(props) {
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [pokemonPhoto, setPokemonPhoto] = useState(null);
   const [detailsScreenIndex, setDetailsScreenIndex] = useState(undefined);
@@ -20,12 +16,14 @@ export function Pokedex(props) {
   const [characteristics, setCharacteristics] = useState([]);
 
   useEffect(async () => {
-    const locations = await getLocations(props.pokedex[currentIndex]?.id)
-    const characteristics = await getCharacteristics(props.pokedex[currentIndex]?.id)
+    const locations = await getLocations(props.pokedex[currentIndex]?.id);
+    const characteristics = await getCharacteristics(
+      props.pokedex[currentIndex]?.id
+    );
 
-    setLocationsList(locations?.data)
-    setCharacteristics(characteristics?.data)
-  }, [currentIndex])
+    setLocationsList(locations?.data);
+    setCharacteristics(characteristics?.data);
+  }, [currentIndex]);
 
   useEffect(() => {
     if (props.pokedex.length > 0) {
@@ -37,44 +35,44 @@ export function Pokedex(props) {
     const deletando = Array.from(props.pokedex);
     deletando.splice(index, 1);
     props.setPokedex(deletando);
-    setPokemonPhoto(null)
+    setPokemonPhoto(null);
   };
 
   const changePhoto = (version) => {
-    if (version === 'back') {
-      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_back_default)
-    } else if (version === 'front-female') {
-      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_front_female)
-    } else if (version === 'back-female') {
-      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_back_female)
-    } else if (version === 'artwork') {
-      setPokemonPhoto(props.pokedex[currentIndex]?.url.artwork_front)
+    if (version === "back") {
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_back_default);
+    } else if (version === "front-female") {
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_front_female);
+    } else if (version === "back-female") {
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_back_female);
+    } else if (version === "artwork") {
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.artwork_front);
     } else {
-      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_front_default)
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_front_default);
     }
-  }
+  };
 
   const nextPokemon = () => {
-    if (currentIndex === (props.pokedex.length - 1)) {
-      setCurrentIndex(0)
-      setPokemonPhoto(null)
+    if (currentIndex === props.pokedex.length - 1) {
+      setCurrentIndex(0);
+      setPokemonPhoto(null);
     } else {
       const next = currentIndex + 1;
-      setCurrentIndex(next)
-      setPokemonPhoto(null)
+      setCurrentIndex(next);
+      setPokemonPhoto(null);
     }
   };
 
   const lastPokemon = () => {
     if (currentIndex === 0) {
-      setCurrentIndex(props.pokedex.length - 1)
-      setPokemonPhoto(null)
+      setCurrentIndex(props.pokedex.length - 1);
+      setPokemonPhoto(null);
     } else {
       const last = currentIndex - 1;
-      setCurrentIndex(last)
-      setPokemonPhoto(null)
+      setCurrentIndex(last);
+      setPokemonPhoto(null);
     }
-  }
+  };
 
   const changeStatsScreen = (id) => {
     if (props.pokedex.length > 0) {
@@ -85,22 +83,22 @@ export function Pokedex(props) {
 
   }
 
-
   const renderTypeTranslated = props.pokedex[currentIndex]?.tipo.map((item) => {
-    return <span>{translateType(item.type.name)} </span>
-  })
+    return <span>{translateType(item.type.name)} </span>;
+  });
 
-  let renderStatsScreen
+  let renderStatsScreen;
   switch (detailsScreenIndex) {
     case 1:
+
       renderStatsScreen = <StatsScreen>
         <h2>{props.pokedex[currentIndex]?.nome}</h2>
-        {/* <strong>Nome:</strong> {props.pokedex[currentIndex]?.nome}<br /> */}
         <strong>Tipo(s):</strong> {renderTypeTranslated}<br />
-        {/* <strong>Tipo:</strong> {props.pokedex[currentIndex]?.tipo}<br /> */}
+        
         <strong>Tamanho:</strong> {props.pokedex[currentIndex]?.tamanho}cm<br />
         <strong>Peso:</strong> {props.pokedex[currentIndex]?.peso}Kg<br /><br />
       </StatsScreen>
+
       break;
 
     case 2:
@@ -157,14 +155,26 @@ export function Pokedex(props) {
   const renderPhoto = () => {
     if (props.pokedex.length > 0) {
       if (pokemonPhoto === null) {
-        return <img src={props.pokedex[currentIndex]?.url.gif_front_default} alt={props.pokedex[currentIndex]?.nome} />
+        return (
+          <img
+            src={props.pokedex[currentIndex]?.url.gif_front_default}
+            alt={props.pokedex[currentIndex]?.nome}
+          />
+        );
       } else {
-        return <img src={pokemonPhoto} alt={'Pokedex'} />
+        return <img src={pokemonPhoto} alt={"Pokedex"} />;
       }
     } else {
-      return <img src={'https://s3-us-west-2.amazonaws.com/s.cdpn.io/200653/logo.png'} alt={'Pokedex'} />
+      return (
+        <img
+          src={"https://s3-us-west-2.amazonaws.com/s.cdpn.io/200653/logo.png"}
+          alt={"Pokedex"}
+        />
+      );
     }
+
   }
+
 
   return (
     <PageContainer>
@@ -193,6 +203,7 @@ export function Pokedex(props) {
               <ButtonTopPicture />
               <ButtonTopPicture />
             </TopPicture>
+
             <Picture>
               {renderPhoto()}
             </Picture>
@@ -201,6 +212,7 @@ export function Pokedex(props) {
             >
               X
             </DeleteButton>
+
             <Speakers>
               <div></div>
               <div></div>
@@ -208,6 +220,7 @@ export function Pokedex(props) {
               <div></div>
             </Speakers>
           </Screen>
+
           <ArtworkButton
             onClick={() => changePhoto('artwork')}
           >
@@ -221,6 +234,7 @@ export function Pokedex(props) {
           <BackImageButton
             onClick={() => changePhoto('back')}
           >
+
             costas
           </BackImageButton>
           <Cross>
@@ -250,14 +264,16 @@ export function Pokedex(props) {
           <BlueButtonsContainer1>
             <BlueButton onClick={() => changeStatsScreen(1)}>GERAL</BlueButton>
             <BlueButton onClick={() => changeStatsScreen(2)}>LOCAIS</BlueButton>
+
             <BlueButton onClick={() => changeStatsScreen(3)}>CURIOSIDADE</BlueButton>
             <BlueButton onClick={() => changeStatsScreen(4)}>ESPECIALIDADE</BlueButton>
             <BlueButton onClick={() => changeStatsScreen(5)}>BATALHA</BlueButton>
             <BlueButton onClick={() => changeStatsScreen(6)}>HABILIDADES</BlueButton>
-            {/* <BlueButton onClick={() => changeStatsScreen(5)}>x</BlueButton> */}
+            
           </BlueButtonsContainer1>
           <MiniButtonOrange />
           <MiniButtonDarkGreen />
+
           <YellowBox1 />
           <YellowBox2 />
           <BgCurve1Right />
@@ -273,36 +289,3 @@ export function Pokedex(props) {
 }
 
 export default Pokedex;
-
-// const CardsContainer = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// `
-
-// const PokemonContainer = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   flex-direction: column;
-//   background-color: #353D51;
-//   margin: 25px;
-//   max-width: 15vw;
-//   height: 550px;
-//   color: white;
-// `
-
-{
-  /* <CardsContainer>
-  {props.pokedex.map(pokemon => {
-    return (
-      <PokemonContainer>
-        <img src={pokemon.url} />
-        <h2>{pokemon.nome}</h2>
-        <p>{pokemon.tipo}</p>
-        <button onClick={() => deletePokemon(pokemon.nome)}>Remover da Pokedex</button>
-      </PokemonContainer>
-    )
-  })}
-</CardsContainer> */
-}

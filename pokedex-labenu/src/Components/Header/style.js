@@ -12,6 +12,7 @@ export const HeaderToolbar = styled(Toolbar)`
 `;
 export const HeaderLogo = styled.img`
   width: 3vw;
+  cursor: pointer;
 `;
 export const Buttons = styled(Button)`
   && {

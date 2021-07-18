@@ -14,7 +14,6 @@ export default function Header() {
     <div>
       <HeaderAppBar position={"sticky"}>
         <HeaderToolbar component={Container}>
-          {/*  */}
           <HeaderLogo src={Logo} alt="Logo" onClick={() => changePage("/")} />
 
           <Buttons
