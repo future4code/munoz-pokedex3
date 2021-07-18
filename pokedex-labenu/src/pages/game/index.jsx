@@ -6,7 +6,7 @@ import { Credits } from "./style.js";
 import { useHistory } from "react-router-dom";
 import { base_url } from "../../constants/api.js";
 import Header from "../../Components/Header/index.jsx";
-import ComponentFooter from "../Footer/index.jsx";
+import ComponentFooter from "../../Components/Footer";
 
 const capFirstLetter = (string) => {
   return string.replace(string[0], string[0].toUpperCase());
@@ -46,7 +46,7 @@ export function Game() {
         .catch((error) => {
           alert(
             error +
-            ". Please reload the page and be sure to have internet connection."
+              ". Please reload the page and be sure to have internet connection."
           );
           setIsLoading(false);
         });
@@ -157,7 +157,10 @@ export function Game() {
         </button>
       </GameContainer>
       <Credits>
-        Originalmente desenvolvido por <a target="_blank" href="https://github.com/alanriaho/PokemonGame">Alanriaho</a>
+        Originalmente desenvolvido por{" "}
+        <a target="_blank" href="https://github.com/alanriaho/PokemonGame">
+          Alanriaho
+        </a>
       </Credits>
       <ComponentFooter />
     </>

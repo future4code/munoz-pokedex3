@@ -1,11 +1,58 @@
 import React, { useState, useEffect } from "react";
 import { translateType } from "../../services/formatDataPokemons";
 import { getCharacteristics, getLocations } from "../../requests/pokemonAPI";
-import ComponentFooter from "../Footer";
+import ComponentFooter from "../../Components/Footer";
 import Header from "../../Components/Header";
-import ArtworkIcon from "../../assets/artwork-icon.png"
+import ArtworkIcon from "../../assets/artwork-icon.png";
 import {
-  FrontImageButton, BackImageButton, BgCurve1Left, BgCurve2Left, ArtworkButton, DownArrow, DeleteButton, ButtonGlass, ButtonTopPicture, Cross, CrossMidCircle, Curve1Left, Curve2Left, DownTriangle, Junction, Junction1, Junction2, LeftArrow, LeftfTriangle, LeftSide, MiddleCross, MiniButtonGreen, MiniButtonRed, MiniButtonYellow, MyPokedex, Picture, Reflect, RightArrow, RightSide, RightTriangle, Screen, Speakers, UpArrow, TopPicture, UpTriangle, StatsScreen, BlueButtonsContainer1, BlueButton, MiniButtonOrange, MiniButtonDarkGreen, YellowBox1, YellowBox2, BgCurve1Right, BgCurve2Right, Curve1Right, Curve2Right, LogoDiv, PageContainer
+  FrontImageButton,
+  BackImageButton,
+  BgCurve1Left,
+  BgCurve2Left,
+  ArtworkButton,
+  DownArrow,
+  DeleteButton,
+  ButtonGlass,
+  ButtonTopPicture,
+  Cross,
+  CrossMidCircle,
+  Curve1Left,
+  Curve2Left,
+  DownTriangle,
+  Junction,
+  Junction1,
+  Junction2,
+  LeftArrow,
+  LeftfTriangle,
+  LeftSide,
+  MiddleCross,
+  MiniButtonGreen,
+  MiniButtonRed,
+  MiniButtonYellow,
+  MyPokedex,
+  Picture,
+  Reflect,
+  RightArrow,
+  RightSide,
+  RightTriangle,
+  Screen,
+  Speakers,
+  UpArrow,
+  TopPicture,
+  UpTriangle,
+  StatsScreen,
+  BlueButtonsContainer1,
+  BlueButton,
+  MiniButtonOrange,
+  MiniButtonDarkGreen,
+  YellowBox1,
+  YellowBox2,
+  BgCurve1Right,
+  BgCurve2Right,
+  Curve1Right,
+  Curve2Right,
+  LogoDiv,
+  PageContainer,
 } from "./style";
 
 export function Pokedex(props) {
@@ -27,14 +74,14 @@ export function Pokedex(props) {
 
   useEffect(() => {
     if (props.pokedex.length > 0) {
-      setDetailsScreenIndex(1)
+      setDetailsScreenIndex(1);
     }
-  }, [])
+  }, []);
 
   const deletePokemon = (index) => {
-    const deletando = Array.from(props.pokedex);
-    deletando.splice(index, 1);
-    props.setPokedex(deletando);
+    const newArrPokedex = Array.from(props.pokedex);
+    newArrPokedex.splice(index, 1);
+    props.setPokedex(newArrPokedex);
     setPokemonPhoto(null);
   };
 
@@ -76,12 +123,11 @@ export function Pokedex(props) {
 
   const changeStatsScreen = (id) => {
     if (props.pokedex.length > 0) {
-      setDetailsScreenIndex(id)
+      setDetailsScreenIndex(id);
     } else {
-      setDetailsScreenIndex(undefined)
+      setDetailsScreenIndex(undefined);
     }
-
-  }
+  };
 
   const renderTypeTranslated = props.pokedex[currentIndex]?.tipo.map((item) => {
     return <span>{translateType(item.type.name)} </span>;
@@ -90,65 +136,84 @@ export function Pokedex(props) {
   let renderStatsScreen;
   switch (detailsScreenIndex) {
     case 1:
-
-      renderStatsScreen = <StatsScreen>
-        <h2>{props.pokedex[currentIndex]?.nome}</h2>
-        <strong>Tipo(s):</strong> {renderTypeTranslated}<br />
-        
-        <strong>Tamanho:</strong> {props.pokedex[currentIndex]?.tamanho}cm<br />
-        <strong>Peso:</strong> {props.pokedex[currentIndex]?.peso}Kg<br /><br />
-      </StatsScreen>
+      renderStatsScreen = (
+        <StatsScreen>
+          <h2>{props.pokedex[currentIndex]?.nome}</h2>
+          <strong>Tipo(s):</strong> {renderTypeTranslated}
+          <br />
+          <strong>Tamanho:</strong> {props.pokedex[currentIndex]?.tamanho}cm
+          <br />
+          <strong>Peso:</strong> {props.pokedex[currentIndex]?.peso}Kg
+          <br />
+          <br />
+        </StatsScreen>
+      );
 
       break;
 
     case 2:
       const list = locationsList?.map((local) => {
-        return <p>{local.location_area.name}</p>
-      })
-      renderStatsScreen = <StatsScreen>
-        <h3>ENCONTRADO NOS LOCAIS:</h3>
-        {list.length > 0 ? list : <p>Não há locais registrados</p>}
-      </StatsScreen>
+        return <p>{local.location_area.name}</p>;
+      });
+      renderStatsScreen = (
+        <StatsScreen>
+          <h3>ENCONTRADO NOS LOCAIS:</h3>
+          {list.length > 0 ? list : <p>Não há locais registrados</p>}
+        </StatsScreen>
+      );
       break;
 
     case 3:
-      renderStatsScreen = <StatsScreen>
-        <h3>CURIOSIDADE</h3>
-        {characteristics.descriptions[2].description}</StatsScreen>
+      renderStatsScreen = (
+        <StatsScreen>
+          <h3>CURIOSIDADE</h3>
+          {characteristics.descriptions[2].description}
+        </StatsScreen>
+      );
       break;
 
     case 4:
-      renderStatsScreen = <StatsScreen>
-        <h3>ESPECIALIDADE</h3>
-        {characteristics.highest_stat.name}
-      </StatsScreen>
+      renderStatsScreen = (
+        <StatsScreen>
+          <h3>ESPECIALIDADE</h3>
+          {characteristics.highest_stat.name}
+        </StatsScreen>
+      );
       break;
 
     case 5:
-      renderStatsScreen = <StatsScreen>
-        <h3>STATS DE BATALHA</h3>
-        <strong>HP:</strong> {props.pokedex[currentIndex]?.hp}<br />
-        <strong>Ataque:</strong> {props.pokedex[currentIndex]?.ataque}<br />
-        <strong>Defesa:</strong> {props.pokedex[currentIndex]?.defesa}<br />
-        <strong>Velocidade:</strong> {props.pokedex[currentIndex]?.velocidade}<br />
-      </StatsScreen>
+      renderStatsScreen = (
+        <StatsScreen>
+          <h3>STATS DE BATALHA</h3>
+          <strong>HP:</strong> {props.pokedex[currentIndex]?.hp}
+          <br />
+          <strong>Ataque:</strong> {props.pokedex[currentIndex]?.ataque}
+          <br />
+          <strong>Defesa:</strong> {props.pokedex[currentIndex]?.defesa}
+          <br />
+          <strong>Velocidade:</strong> {props.pokedex[currentIndex]?.velocidade}
+          <br />
+        </StatsScreen>
+      );
       break;
 
     case 6:
-      const skills = props.pokedex[currentIndex]?.habilidades.map((habilidade) => {
-        return <p>{habilidade.ability.name}</p>
-      })
+      const skills = props.pokedex[currentIndex]?.habilidades.map(
+        (habilidade) => {
+          return <p>{habilidade.ability.name}</p>;
+        }
+      );
 
-      renderStatsScreen = <StatsScreen>
-        <h3>HABILIDADES</h3>
-        {skills}
-      </StatsScreen>
+      renderStatsScreen = (
+        <StatsScreen>
+          <h3>HABILIDADES</h3>
+          {skills}
+        </StatsScreen>
+      );
       break;
 
     default:
-      renderStatsScreen = <StatsScreen>
-        Selecione um Pokemon
-      </StatsScreen>
+      renderStatsScreen = <StatsScreen>Selecione um Pokemon</StatsScreen>;
       break;
   }
 
@@ -172,9 +237,7 @@ export function Pokedex(props) {
         />
       );
     }
-
-  }
-
+  };
 
   return (
     <PageContainer>
@@ -204,12 +267,8 @@ export function Pokedex(props) {
               <ButtonTopPicture />
             </TopPicture>
 
-            <Picture>
-              {renderPhoto()}
-            </Picture>
-            <DeleteButton
-              onClick={() => deletePokemon(currentIndex)}
-            >
+            <Picture>{renderPhoto()}</Picture>
+            <DeleteButton onClick={() => deletePokemon(currentIndex)}>
               X
             </DeleteButton>
 
@@ -221,29 +280,20 @@ export function Pokedex(props) {
             </Speakers>
           </Screen>
 
-          <ArtworkButton
-            onClick={() => changePhoto('artwork')}
-          >
-            <img src={ArtworkIcon} alt={'ArtworkIcon'} />
+          <ArtworkButton onClick={() => changePhoto("artwork")}>
+            <img src={ArtworkIcon} alt={"ArtworkIcon"} />
           </ArtworkButton>
-          <FrontImageButton
-            onClick={() => changePhoto('front')}
-          >
+          <FrontImageButton onClick={() => changePhoto("front")}>
             frente
           </FrontImageButton>
-          <BackImageButton
-            onClick={() => changePhoto('back')}
-          >
-
+          <BackImageButton onClick={() => changePhoto("back")}>
             costas
           </BackImageButton>
           <Cross>
             <LeftArrow onClick={lastPokemon}>
               <LeftfTriangle />
             </LeftArrow>
-            <UpArrow
-              onClick={() => changePhoto('front')}
-            >
+            <UpArrow onClick={() => changePhoto("front")}>
               <UpTriangle />
             </UpArrow>
             <RightArrow onClick={nextPokemon}>
@@ -252,9 +302,7 @@ export function Pokedex(props) {
             <MiddleCross>
               <CrossMidCircle />
             </MiddleCross>
-            <DownArrow
-              onClick={() => changePhoto('back')}
-            >
+            <DownArrow onClick={() => changePhoto("back")}>
               <DownTriangle />
             </DownArrow>
           </Cross>
@@ -265,11 +313,18 @@ export function Pokedex(props) {
             <BlueButton onClick={() => changeStatsScreen(1)}>GERAL</BlueButton>
             <BlueButton onClick={() => changeStatsScreen(2)}>LOCAIS</BlueButton>
 
-            <BlueButton onClick={() => changeStatsScreen(3)}>CURIOSIDADE</BlueButton>
-            <BlueButton onClick={() => changeStatsScreen(4)}>ESPECIALIDADE</BlueButton>
-            <BlueButton onClick={() => changeStatsScreen(5)}>BATALHA</BlueButton>
-            <BlueButton onClick={() => changeStatsScreen(6)}>HABILIDADES</BlueButton>
-            
+            <BlueButton onClick={() => changeStatsScreen(3)}>
+              CURIOSIDADE
+            </BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(4)}>
+              ESPECIALIDADE
+            </BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(5)}>
+              BATALHA
+            </BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(6)}>
+              HABILIDADES
+            </BlueButton>
           </BlueButtonsContainer1>
           <MiniButtonOrange />
           <MiniButtonDarkGreen />
@@ -282,7 +337,10 @@ export function Pokedex(props) {
           <Curve2Right />
         </RightSide>
       </MyPokedex>
-      <p>Baseado na pokedex de <a href={'https://codepen.io/Bidji/pen/MYdPwo'}>Bidji</a></p>
+      <p>
+        Baseado na pokedex de{" "}
+        <a href={"https://codepen.io/Bidji/pen/MYdPwo"}>Bidji</a>
+      </p>
       <ComponentFooter />
     </PageContainer>
   );
