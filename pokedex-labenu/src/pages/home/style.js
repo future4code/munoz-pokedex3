@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-// import { theme } from "../../themes/index";
-
 export const CardsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -9,29 +7,11 @@ export const CardsContainer = styled.div`
   justify-content: center;
   margin: 20px 20px 0 50px;
 `;
-export const DivAddedToCart = styled.div`
-  position: fixed;
-  top: 0;
-  background-color: green;
-  width: 220px;
-  text-align: center;
-  border-radius: 0 0 50px 50px;
-  padding-top: 15px;
-  z-index: 999999;
-`;
-export const CloseMessage = styled.div`
-  margin: 10px 0;
-  cursor: pointer;
-  font-size: large;
-`;
+
 export const Card = styled.div``;
 
 export const FlipContainer = styled.div`
   width: 80%;
-
-  /* :hover .flipper {
-    transform: rotateY(180deg);
-  } */
 `;
 
 export const PokemonContainer = styled.div`
@@ -84,7 +64,7 @@ export const PokemonContainer = styled.div`
 
   margin: 25px;
   padding-top: 30px;
-  max-width: 20vw;
+  max-width: 19vw;
   height: 48vh;
   color: white;
   border-radius: 10px;
@@ -97,6 +77,19 @@ export const PokemonContainer = styled.div`
   transform: ${(props) =>
     props.flippedCardId === props.pokemonId ? "rotateY(180deg)" : "none"};
 `;
+export const ContainerTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #2b3042;
+  width: 19vw;
+  margin-top: 20px;
+  padding-bottom: 38px;
+  padding-top: 25px;
+  height: 23vh;
+  border-radius: 10px;
+`;
 export const FrontFlipper = styled.div`
   position: absolute;
   backface-visibility: hidden;
@@ -107,7 +100,7 @@ export const BackFlipper = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  transform: rotateY( 180deg );
+  transform: rotateY(180deg);
   backface-visibility: hidden;
 
   p {
@@ -119,26 +112,7 @@ export const BackFlipper = styled.div`
   }
 `;
 
-export const ContainerTitle = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #2b3042;
-  width: 19vw;
-  margin-top: 20px;
-  padding-bottom: 38px;
-  padding-top: 25px;
-
-  /* width: 13vw;
-  height: 22vh;
-  margin-top: 48px; */
-  
-  border-radius: 10px;
-`;
-
 export const PokemonImage = styled.img`
-  /* width: 10vw; */
   margin-left: 30%;
 `;
 
@@ -150,7 +124,7 @@ export const ButtonCard = styled.button`
   :hover {
     background-color: rgb(109, 125, 166);
   }
-  margin-top: 32px;
+  margin-top: 15px;
   border-radius: 8px;
   border: none;
   font-family: Poppins;
@@ -165,8 +139,3 @@ export const Arrows = styled.img`
   width: 3vw;
   margin: 35px 12px 0 12px;
 `;
-
-// ((props) => (
-//   <Typography component={"h1"} variant={"body1"} {...props} />
-// ))`
-//   font-weight: bold;

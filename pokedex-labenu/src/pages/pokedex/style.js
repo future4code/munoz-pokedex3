@@ -1,19 +1,26 @@
 import styled from "styled-components";
 import { darkRed } from "../../constants/colors";
 
-
-
-
 export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+
+  button {
+    border: none;
+  }
+
+  p {
+    margin: 0 auto;
+  }
 `
 
 
-  export const MyPokedex = styled.div`
+
+export const MyPokedex = styled.div`
   width: 750px;
-  margin: 50px auto 0 auto;
+  margin: 50px auto 20px auto;
 
   @media (max-width: 768px) {
     width: 400px;
@@ -53,8 +60,6 @@ export const LogoDiv = styled.div`
   @media (max-width: 768px) {
     width: 281px;
     height: 99px;
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/200653/logo.png")
-      no-repeat left top;
     z-index: 1;
 
     position: absolute;
@@ -285,7 +290,6 @@ export const Junction2 = styled.div`
 
 export const Screen = styled.div`
   height: 245px;
-  /* width: 260px; */
   padding: 0 20px;
   background-color: #b0b0b0;
   float: left;
@@ -354,16 +358,21 @@ export const Picture = styled.div`
     min-height: 130px;
     max-height: 100%;
     max-width: 100%;
-    
   }
 `;
 
-export const ButtomBottomPicture = styled.div`
+export const DeleteButton = styled.button`
+  cursor: pointer;
   height: 26px;
   width: 26px;
   background-color: #c00d0d;
   margin-left: 35px;
   float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-small;
+  font-weight: 700;
 
   border-radius: 30px;
   -webkit-border-radius: 30px;
@@ -379,7 +388,12 @@ export const ButtomBottomPicture = styled.div`
   background: -webkit-linear-gradient(top, #c00d0d 0%, #8b0000 80%);
   background: -moz-linear-gradient(top, #c00d0d 0%, #8b0000 80%);
   background: -o-linear-gradient(top, #c00d0d 0%, #8b0000 80%);
-`;
+ 
+  :active {
+      border: 1px solid rgb(133, 133, 133);
+      border-style: inset ;
+  }
+`
 
 export const Speakers = styled.div`
   float: right;
@@ -399,10 +413,14 @@ export const Speakers = styled.div`
   }
 `;
 
-export const BigBlueButton = styled.div`
+export const ArtworkButton = styled.button`
+  cursor: pointer;
   height: 50px;
   width: 50px;
   background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   position: absolute;
   top: 395px;
@@ -422,9 +440,14 @@ export const BigBlueButton = styled.div`
   -webkit-box-shadow: -3px 2px #001c91;
   -moz-box-shadow: -3px 2px #001c91;
   -o-box-shadow: -3px 2px #001c91;
+
+  :active {
+      border: 1px solid rgb(133, 133, 133);
+      border-style: inset ;
+  }
 `;
 
-export const BarButton = styled.div`
+export const BarButton = styled.button`
   height: 13px;
   width: 50px;
 
@@ -435,10 +458,21 @@ export const BarButton = styled.div`
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
   -o-border-radius: 100px;
+
+  :active {
+      border: 1px solid rgb(133, 133, 133);
+      border-style: inset ;
+  }
 `;
 
-export const BarButtonLeft = styled(BarButton)`
+export const FrontImageButton = styled(BarButton)`
+  cursor: pointer;
   left: 100px;
+  font-size: x-small;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   background: linear-gradient(top, #50fb05 0%, #057b05 100%);
   background: -webkit-linear-gradient(top, #50fb05 0%, #057b05 100%);
@@ -451,8 +485,14 @@ export const BarButtonLeft = styled(BarButton)`
   -o-box-shadow: -1px 2px #004200;
 `;
 
-export const BarButtonRight = styled(BarButton)`
+export const BackImageButton = styled(BarButton)`
+  cursor: pointer;
   left: 165px;
+  font-size: x-small;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   background: linear-gradient(top, #fb6505 0%, #bb0505 100%);
   background: -webkit-linear-gradient(top, #fb6505 0%, #bb0505 100%);
@@ -466,6 +506,7 @@ export const BarButtonRight = styled(BarButton)`
 `;
 
 export const Cross = styled.div`
+  cursor: pointer;
   width: 90px;
   height: 90px;
 
@@ -474,7 +515,7 @@ export const Cross = styled.div`
   left: 230px;
 `;
 
-export const CrossButton = styled.div`
+export const CrossButton = styled.button`
   width: 30px;
   height: 30px;
   background-color: #222;
@@ -504,6 +545,12 @@ export const UpArrow = styled(CrossButton)`
   -webkit-border-top-right-radius: 5px;
   -moz-border-top-right-radius: 5px;
   -o-border-top-right-radius: 5px;
+
+  :active {
+      border-width: 1px 1px 0px 1px;
+      border-color: rgb(133, 133, 133);
+      border-style: inset ;
+  }
 `;
 export const RightArrow = styled(CrossButton)`
   top: 30px;
@@ -518,6 +565,12 @@ export const RightArrow = styled(CrossButton)`
   -webkit-border-bottom-right-radius: 5px;
   -moz-border-bottom-right-radius: 5px;
   -o-border-bottom-right-radius: 5px;
+
+  :active {
+      border-width: 0px 1px 1px 0px;
+      border-color: rgb(133, 133, 133);
+      border-style: inset ;
+  }
 `;
 export const DownArrow = styled(CrossButton)`
   bottom: 0;
@@ -532,6 +585,12 @@ export const DownArrow = styled(CrossButton)`
   -webkit-border-bottom-right-radius: 5px;
   -moz-border-bottom-right-radius: 5px;
   -o-border-bottom-right-radius: 5px;
+
+  :active {
+      border-width: 0px 1px 1px 1px;
+      border-color: rgb(133, 133, 133);
+      border-style: inset ;
+  }
 `;
 export const LeftArrow = styled(CrossButton)`
   top: 30px;
@@ -547,6 +606,12 @@ export const LeftArrow = styled(CrossButton)`
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-bottom-left-radius: 5px;
   -o-border-bottom-left-radius: 5px;
+
+  :active {
+      border-width: 1px 0px 1px 1px;
+      border-color: rgb(133, 133, 133);
+      border-style: inset ;
+  }
 `;
 
 export const CrossMidCircle = styled.div`
@@ -642,21 +707,22 @@ export const BlueButtonsContainer1 = styled.div`
   justify-content: space-evenly;
   position: absolute;
   flex-wrap: wrap;
-  top: 295px;
-  left: 49px;
-`;
-export const BlueButtonsContainer2 = styled.div`
-  z-index: 1;
-
-  position: absolute;
-  top: 335px;
-  left: 49px;
+  top: 280px;
+  left: 20px;
+  width: 295px;
 `;
 
-export const BlueButton = styled.div`
+export const BlueButton = styled.button`
+  cursor: pointer;
   height: 35px;
-  width: 45%;
+  width: 31%;
   background-color: #003300;
+  margin: 3px;
+  font-size: x-small;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* float: left; */
   /* margin-right: 7px; */
 
@@ -674,6 +740,11 @@ export const BlueButton = styled.div`
   -webkit-box-shadow: -1px 2px #001c91;
   -moz-box-shadow: -1px 2px #001c91;
   -o-box-shadow: -1px 2px #001c91;
+
+  :active {
+      border: 1px solid rgb(133, 133, 133);
+      border-style: inset ;
+  }
 `;
 
 export const MiniButtonRight = styled.div`
@@ -767,7 +838,7 @@ export const YellowBox2 = styled.div`
 
   position: absolute;
   top: 415px;
-  left: 25px;
+  left: 170px;
 
   border-radius: 15px;
   -webkit-border-radius: 15px;
