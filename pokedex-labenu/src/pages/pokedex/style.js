@@ -1,17 +1,13 @@
 import styled from "styled-components";
 import { darkRed } from "../../constants/colors";
 
-
-
-
 export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-`
+`;
 
-
-  export const MyPokedex = styled.div`
+export const MyPokedex = styled.div`
   width: 750px;
   margin: 50px auto 0 auto;
 
@@ -285,7 +281,6 @@ export const Junction2 = styled.div`
 
 export const Screen = styled.div`
   height: 245px;
-  /* width: 260px; */
   padding: 0 20px;
   background-color: #b0b0b0;
   float: left;
@@ -354,7 +349,6 @@ export const Picture = styled.div`
     min-height: 130px;
     max-height: 100%;
     max-width: 100%;
-    
   }
 `;
 
