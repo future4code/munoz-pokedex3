@@ -331,6 +331,9 @@ export const ButtonTopPicture = styled.div`
 `;
 
 export const Picture = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 175px;
   width: 254px;
   margin-top: 20px;
@@ -348,7 +351,10 @@ export const Picture = styled.div`
   img {
     display: block;
     margin: 0 auto;
+    min-height: 130px;
     max-height: 100%;
+    max-width: 100%;
+    
   }
 `;
 
@@ -632,7 +638,10 @@ export const StatsScreen = styled.div`
 export const BlueButtonsContainer1 = styled.div`
   z-index: 1;
 
+  display: flex;
+  justify-content: space-evenly;
   position: absolute;
+  flex-wrap: wrap;
   top: 295px;
   left: 49px;
 `;
@@ -646,10 +655,10 @@ export const BlueButtonsContainer2 = styled.div`
 
 export const BlueButton = styled.div`
   height: 35px;
-  width: 45px;
+  width: 45%;
   background-color: #003300;
-  float: left;
-  margin-right: 7px;
+  /* float: left; */
+  /* margin-right: 7px; */
 
   border-radius: 10px;
   -webkit-border-radius: 10px;

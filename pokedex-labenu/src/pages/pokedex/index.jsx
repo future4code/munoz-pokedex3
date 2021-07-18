@@ -1,67 +1,80 @@
-import { useHistory } from "react-router-dom";
-import React from "react";
-import { PowerInputSharp } from "@material-ui/icons";
-import { useState } from "react";
-import { getLocations, getPokemonList } from "../../requests/pokemonAPI";
+import React, { useState, useEffect } from "react";
+import { translateType } from "../../services/formatDataPokemons";
+import { getCharacteristics, getLocations, getPokemonList } from "../../requests/pokemonAPI";
 import ComponentFooter from "../Footer";
 import Header from "../../Components/Header";
 
 import {
   BarButtonLeft, BarButtonRight, BgCurve1Left, BgCurve2Left, BigBlueButton, DownArrow, ButtomBottomPicture, ButtonGlass, ButtonTopPicture, Cross, CrossMidCircle, Curve1Left, Curve2Left, DownTriangle, Junction, Junction1, Junction2, LeftArrow, LeftfTriangle, LeftSide, MiddleCross, MiniButtonGreen, MiniButtonRed, MiniButtonYellow, MyPokedex, Picture, Reflect, RightArrow, RightSide, RightTriangle, Screen, Speakers, UpArrow, TopPicture, UpTriangle, StatsScreen, BlueButtonsContainer1, BlueButtonsContainer2, BlueButton, MiniButtonOrange, MiniButtonDarkGreen, BarButtonRightSide, YellowBox1, YellowBox2, BgCurve1Right, BgCurve2Right, Curve1Right, Curve2Right, LogoDiv, PageContainer
 } from "./style";
-import { translateType } from "../../services/formatDataPokemons";
-import { useEffect } from "react";
+
 
 
 export function Pokedex(props) {
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [pokemonPhoto, setPokemonPhoto] = useState(null);
   const [detailsScreenIndex, setDetailsScreenIndex] = useState(1);
   const [locationsList, setLocationsList] = useState([]);
-
-
-  const history = useHistory();
-  // const voltar = () => history.push("");
+  const [characteristics, setCharacteristics] = useState([]);
 
   useEffect(async () => {
-    const locationsList = await getLocations(props.pokedex[currentIndex]?.locais)
-    // console.log("locationsList: ", locationsList.data);
-    setLocationsList(locationsList.data)
+    const locations = await getLocations(props.pokedex[currentIndex]?.id)
+    const characteristics = await getCharacteristics(props.pokedex[currentIndex]?.id)
+
+    setLocationsList(locations?.data)
+    setCharacteristics(characteristics?.data)
   }, [currentIndex])
 
   const deletePokemon = (index) => {
     const deletando = Array.from(props.pokedex);
     deletando.splice(index, 1);
     props.setPokedex(deletando);
+    setPokemonPhoto(null)
   };
+
+  const changePhoto = (version) => {
+    if (version === 'back') {
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_back_default)
+    } else if (version === 'front-female') {
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_front_female)
+    } else if (version === 'back-female') {
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_back_female)
+    } else if (version === 'artwork') {
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.artwork_front)
+    } else {
+      setPokemonPhoto(props.pokedex[currentIndex]?.url.gif_front_default)
+    }
+  }
 
   const nextPokemon = () => {
     if (currentIndex === (props.pokedex.length - 1)) {
       setCurrentIndex(0)
+      setPokemonPhoto(null)
     } else {
       const next = currentIndex + 1;
-      setCurrentIndex(next);
+      setCurrentIndex(next)
+      setPokemonPhoto(null)
     }
   };
 
   const lastPokemon = () => {
     if (currentIndex === 0) {
       setCurrentIndex(props.pokedex.length - 1)
+      setPokemonPhoto(null)
     } else {
       const last = currentIndex - 1;
-      setCurrentIndex(last);
+      setCurrentIndex(last)
+      setPokemonPhoto(null)
     }
   }
 
-  const changeDetailsScreen = (id) => {
+  const changeStatsScreen = (id) => {
     setDetailsScreenIndex(id)
   }
 
-  // const renderList = props.pokedex.map((pokemon) => {
-  //   return <p>{pokemon.nome}</p>
-  // })
 
-  const renderTypeList = props.pokedex[currentIndex]?.tipo.map((item) => {
+  const renderTypeTranslated = props.pokedex[currentIndex]?.tipo.map((item) => {
     return <span>{translateType(item.type.name)} </span>
   })
 
@@ -70,7 +83,7 @@ export function Pokedex(props) {
     case 1:
       renderStatsScreen = <StatsScreen>
         <strong>Nome:</strong> {props.pokedex[currentIndex]?.nome}<br />
-        <strong>Tipo(s):</strong> {renderTypeList}<br />
+        <strong>Tipo(s):</strong> {renderTypeTranslated}<br />
         {/* <strong>Tipo:</strong> {props.pokedex[currentIndex]?.tipo}<br /> */}
         <strong>Tamanho:</strong> {props.pokedex[currentIndex]?.tamanho}cm<br />
         <strong>Peso:</strong> {props.pokedex[currentIndex]?.peso}Kg<br /><br />
@@ -78,22 +91,27 @@ export function Pokedex(props) {
       break;
 
     case 2:
-      ///////////////////////////////////////
-      console.log("SWITCH 2: ", locationsList);
-      /////////////////////////////////////
       const list = locationsList?.map((local) => {
         return <p>{local.location_area.name}</p>
       })
-      ///////////////////////////////////////      
-      console.log("SWITCH 2 - LIST: ", list);
-      ///////////////////////////////////////
       renderStatsScreen = <StatsScreen>ENCONTRADO NOS LOCAIS:{list}</StatsScreen>
+      break;
+
+    case 3:
+      renderStatsScreen = <StatsScreen><p>Característica:</p>
+        {characteristics.descriptions[2].description}</StatsScreen>
+      break;
+
+    case 4:
+      // console.log(characteristics.highest_stat.name);
+      renderStatsScreen = <StatsScreen><p>Ponto Forte:</p>
+        {characteristics.highest_stat.name}</StatsScreen>
       break;
 
     default:
       renderStatsScreen = <StatsScreen>
         <strong>Nome:</strong> {props.pokedex[currentIndex]?.nome}<br />
-        <strong>Tipo(s):</strong> {renderTypeList}<br />
+        <strong>Tipo(s):</strong> {renderTypeTranslated}<br />
         {/* <strong>Tipo:</strong> {props.pokedex[currentIndex]?.tipo}<br /> */}
         <strong>Tamanho:</strong> {props.pokedex[currentIndex]?.tamanho}cm<br />
         <strong>Peso:</strong> {props.pokedex[currentIndex]?.peso}Kg<br /><br />
@@ -101,18 +119,22 @@ export function Pokedex(props) {
       break;
   }
 
-
-
+  const renderPhoto = () => {
+    if (props.pokedex.length > 0) {
+      if (pokemonPhoto === null) {
+        return <img src={props.pokedex[currentIndex]?.url.gif_front_default} alt={props.pokedex[currentIndex]?.nome} />
+      } else {
+        return <img src={pokemonPhoto} alt={'Pokedex'} />
+      }
+    } else {
+      return <img src={'https://s3-us-west-2.amazonaws.com/s.cdpn.io/200653/logo.png'} alt={'Pokedex'} />
+    }
+  }
 
 
   return (
     <PageContainer>
       <Header />
-      {/* {detailsScreenIndex && renderList} */}
-      {/* Pokedex!
-      <button onClick={voltar}>Voltar</button>
-      <button onClick={detalhes}>Detalhes</button>
-      <button onClick={getPokemonList}>Get Pokemon</button> */}
       <MyPokedex>
         <LeftSide>
           <LogoDiv />
@@ -138,9 +160,11 @@ export function Pokedex(props) {
               <ButtonTopPicture />
             </TopPicture>
             <Picture>
-              <img src={props.pokedex[currentIndex]?.url.gif_front_default} alt={props.pokedex[currentIndex]?.nome} height="170" />
+              {renderPhoto()}
             </Picture>
-            <ButtomBottomPicture>
+            <ButtomBottomPicture
+              onClick={() => deletePokemon(currentIndex)}
+            >
               Deletar
             </ButtomBottomPicture>
             <Speakers>
@@ -150,11 +174,18 @@ export function Pokedex(props) {
               <div></div>
             </Speakers>
           </Screen>
-          <BigBlueButton />
-          <BarButtonLeft>
+          <BigBlueButton
+            onClick={() => changePhoto('artwork')}
+          > ART
+          </BigBlueButton>
+          <BarButtonLeft
+            onClick={() => changePhoto('front')}
+          >
             frente
           </BarButtonLeft>
-          <BarButtonRight>
+          <BarButtonRight
+            onClick={() => changePhoto('back')}
+          >
             costas
           </BarButtonRight>
           <Cross>
@@ -178,19 +209,19 @@ export function Pokedex(props) {
         <RightSide>
           {renderStatsScreen}
           <BlueButtonsContainer1>
-            <BlueButton onClick={() => changeDetailsScreen(1)}>LOCAIS</BlueButton>
-            <BlueButton onClick={() => changeDetailsScreen(2)}>GERAL</BlueButton>
-            <BlueButton onClick={() => changeDetailsScreen(3)}>x</BlueButton>
-            <BlueButton onClick={() => changeDetailsScreen(4)}>x</BlueButton>
-            <BlueButton onClick={() => changeDetailsScreen(5)}>x</BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(1)}>GERAL</BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(2)}>LOCAIS</BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(3)}>CARAC</BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(4)}>FORTE</BlueButton>
+            {/* <BlueButton onClick={() => changeStatsScreen(5)}>x</BlueButton> */}
           </BlueButtonsContainer1>
-          <BlueButtonsContainer2>
-            <BlueButton onClick={() => changeDetailsScreen(6)}>x </BlueButton>
-            <BlueButton onClick={() => changeDetailsScreen(7)}>x </BlueButton>
-            <BlueButton onClick={() => changeDetailsScreen(8)}>x</BlueButton>
-            <BlueButton onClick={() => changeDetailsScreen(9)}>x</BlueButton>
-            <BlueButton onClick={() => changeDetailsScreen(10)}>x</BlueButton>
-          </BlueButtonsContainer2>
+          {/* <BlueButtonsContainer2>
+            <BlueButton onClick={() => changeStatsScreen(6)}>x </BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(7)}>x </BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(8)}>x</BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(9)}>x</BlueButton>
+            <BlueButton onClick={() => changeStatsScreen(10)}>x</BlueButton>
+          </BlueButtonsContainer2> */}
           <MiniButtonOrange />
           <MiniButtonDarkGreen />
           <BarButtonRightSide />

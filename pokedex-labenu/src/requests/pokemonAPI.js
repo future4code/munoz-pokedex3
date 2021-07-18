@@ -1,9 +1,9 @@
 import axios from "axios";
 import { base_url } from "../constants/api";
-import { convertDecimetresToCm, convertHectogramsToKg, translateType } from "../services/formatDataPokemons";
+import { convertDecimetresToCm, convertHectogramsToKg } from "../services/formatDataPokemons";
 
 export const getPokemonList = async (path, setListData, setPreviousPage, setNextPage) => {
-  console.log('REQUEST LISTA POKEMONS');
+  // console.log('REQUEST LISTA POKEMONS');
   try {
     const pokemonList = await axios.get(`${base_url}${path}`);
 
@@ -15,7 +15,7 @@ export const getPokemonList = async (path, setListData, setPreviousPage, setNext
     });
 
     const pokemonDetails = await Promise.all(pokemonDetailsPromisses);
-    // console.log("RESPOSTA: ", pokemonDetails);
+    console.log("RESPOSTA: ", pokemonDetails);
 
     setListData(pokemonDetails);
   } catch (error) {
@@ -43,51 +43,36 @@ export const getPokemonDetails = async (pokemonName) => {
         gif_back_female: response.data.sprites.versions["generation-v"]["black-white"].animated.back_female,
       },
       habilidades: response.data.abilities,
-      formas: response.data.forms,
-      locais: response.data.location_area_encounters
+      formas: response.data.forms
     };
 
-    console.log("Detalhes do pokemon: ", resposta);
+    // console.log("Detalhes do pokemon: ", resposta);
     return resposta;
   } catch (error) {
     console.log("ERRO CATCH: ", error);
   }
 };
 
-export const getLocations = async (url) => {
-  try {
-    const locais = await axios.get(`${url}`);
-    return locais;
-  } catch (error) {
-    console.log("ERRO LOCAIS: ", error);
-  }
+export const getLocations = async (id) => {
+  // if (id){
+    try {
+      const locais = await axios.get(`${base_url}/pokemon/${id}/encounters`);
+      return locais;
+    } catch (error) {
+      console.log("ERRO LOCAIS: ", error);
+    }
+  // }
 }
 
-
-// export const getNextPagePokemonList = async (setData) => {
-//   try {
-//     const pokemonList = await axios.get(`${base_url}/pokemon`)
-
-//     const pokemonDetailsPromisses = pokemonList?.data.results.map((pokemon) => {
-//       return getPokemonDetails(pokemon.name)
-//     })
-
-//     const pokemonDetails = await Promise.all(pokemonDetailsPromisses)
-//     console.log('RESPOSTA: ', pokemonDetails);
-
-//     setData(pokemonDetails)
-
-//   } catch (error) {
-//     console.log('ERRO LIST: ', error?.data);
-//   }
-
-// }
-const getPokemon = () => {
-  axios
-    .get(`https://pokeapi.co/api/v2/pokemon/`)
-    .then((response) => {
-      // console.log(`DIFERENTE: ${response}`);
-    })
-    .catch((err) => console.log(err));
-};
-getPokemon();
+export const getCharacteristics = async (id) => {
+  // if (id) {
+    try {
+      const characteristics = await axios.get(`${base_url}/characteristic/${id}`);
+  
+      // console.log("REQUISIÇÃO: ", characteristics.data)   
+      return characteristics;
+    } catch (error) {
+      console.log("ERRO LOCAIS: ", error);
+    }
+  // }
+}
