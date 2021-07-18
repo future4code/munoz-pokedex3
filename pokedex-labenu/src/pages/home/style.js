@@ -97,14 +97,18 @@ export const FrontFlipper = styled.div`
 
 export const BackFlipper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   transform: rotateY(180deg);
   backface-visibility: hidden;
 
   p {
-    font-size: 22px;
+    font-size: 20px;
+  }
+
+  div {
+    padding-top: 10px;
   }
 `;
 
