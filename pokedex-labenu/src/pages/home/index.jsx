@@ -1,4 +1,3 @@
-// import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import {
   Arrows,
@@ -21,14 +20,11 @@ import ComponentFooter from "../Footer";
 import Header from "../../Components/Header";
 
 export function Home(props) {
-  // const history = useHistory();
-  // const changePage = (path) => history.push(path);
-
-  const [flippedCardId, setFlippedCardId] = useState('')
+  const [flippedCardId, setFlippedCardId] = useState("");
 
   const flipCard = (id) => {
     if (flippedCardId === id) {
-      return setFlippedCardId('')
+      return setFlippedCardId("");
     }
     setFlippedCardId(id)
   }
@@ -36,7 +32,9 @@ export function Home(props) {
   const addPokedex = (pokemon, index) => {
     const newPokedex = [...props.pokedex, pokemon];
     props.setPokedex(newPokedex);
-
+    if (addPokedex) {
+      return alert(`${pokemon.nome} foi adicionado à pokedex!`);
+    }
     if (filteredPokemons.length === 1) {
       props.goToNextPage();
     }
@@ -73,7 +71,6 @@ export function Home(props) {
                 <h2>{pokemon.nome}</h2>
                 <p>{pokemon.tipo}</p>
                 <ButtonCard onClick={() => addPokedex(pokemon)}>
-                  {/* {adicionou ? "Remover" : "Adicionar"} */}
                   Adicionar à Pokedex
                 </ButtonCard>
               </ContainerTitle>

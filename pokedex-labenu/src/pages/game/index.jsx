@@ -143,7 +143,7 @@ export function Game() {
       <Header />
       <GameContainer>
         <BackButton onClick={backHome}>Voltar</BackButton>
-        <h1>Quem é esse Pokémon?</h1>
+        <h1>Qual é o Pokémon?</h1>
         <ImageContainer>{pokemonImage}</ImageContainer>
         <div className="options-container">{options}</div>
         <button
