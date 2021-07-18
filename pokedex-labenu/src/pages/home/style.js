@@ -9,15 +9,26 @@ export const CardsContainer = styled.div`
   justify-content: center;
   margin: 20px 20px 0 50px;
 `;
-
-
-export const Card = styled.div`
-
-`
+export const DivAddedToCart = styled.div`
+  position: fixed;
+  top: 0;
+  background-color: green;
+  width: 220px;
+  text-align: center;
+  border-radius: 0 0 50px 50px;
+  padding-top: 15px;
+  z-index: 999999;
+`;
+export const CloseMessage = styled.div`
+  margin: 10px 0;
+  cursor: pointer;
+  font-size: large;
+`;
+export const Card = styled.div``;
 
 export const FlipContainer = styled.div`
   width: 80%;
-  
+
   /* :hover .flipper {
     transform: rotateY(180deg);
   } */
@@ -83,7 +94,8 @@ export const PokemonContainer = styled.div`
   position: relative;
   cursor: pointer;
 
-  transform: ${props => (props.flippedCardId === props.pokemonId) ? 'rotateY(180deg)' : 'none'}
+  transform: ${(props) =>
+    props.flippedCardId === props.pokemonId ? "rotateY(180deg)" : "none"};
 `;
 export const FrontFlipper = styled.div`
   position: absolute;
@@ -96,7 +108,7 @@ export const ContainerNomeBotão = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: #2b3042;
-  width: 20vw;
+  width: 19vw;
   margin-top: 20px;
   padding-bottom: 38px;
   padding-top: 25px;
