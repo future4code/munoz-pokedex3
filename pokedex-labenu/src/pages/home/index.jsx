@@ -1,4 +1,3 @@
-// import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import {
   Arrows,
@@ -6,11 +5,12 @@ import {
   Card,
   CardsContainer,
   ContainerButton,
-  ContainerNomeBotão,
+  ContainerTitle,
   FlipContainer,
   FrontFlipper,
   PokemonContainer,
   PokemonImage,
+  BackFlipper
 } from "./style";
 
 import { Container } from "@material-ui/core";
@@ -21,14 +21,11 @@ import Header from "../../Components/Header";
 import { translateType } from "../../services/formatDataPokemons";
 
 export function Home(props) {
-  // const history = useHistory();
-  // const changePage = (path) => history.push(path);
-
-  const [flippedCardId, setFlippedCardId] = useState('')
+  const [flippedCardId, setFlippedCardId] = useState("");
 
   const flipCard = (id) => {
     if (flippedCardId === id) {
-      return setFlippedCardId('')
+      return setFlippedCardId("");
     }
     setFlippedCardId(id)
   }
@@ -36,7 +33,9 @@ export function Home(props) {
   const addPokedex = (pokemon, index) => {
     const newPokedex = [...props.pokedex, pokemon];
     props.setPokedex(newPokedex);
-
+    if (addPokedex) {
+      return alert(`${pokemon.nome} foi adicionado à pokedex!`);
+    }
     if (filteredPokemons.length === 1) {
       props.goToNextPage();
     }
@@ -69,22 +68,29 @@ export function Home(props) {
                 width="110px"
                 height="110px"
               />
-              <ContainerNomeBotão>
+              <ContainerTitle>
                 <h2>{pokemon.nome}</h2>
                 {/* {pokemon.formas.map((forma) => {return <p>{forma.name}</p>})} */}
                 <p>{translateType(pokemon.tipo[0].type.name)}</p>
                 <ButtonCard onClick={() => addPokedex(pokemon)}>
-                  {/* {adicionou ? "Remover" : "Adicionar"} */}
                   Adicionar à Pokedex
                 </ButtonCard>
-              </ContainerNomeBotão>
+              </ContainerTitle>
             </FrontFlipper>
-            <div className="back">
-            </div>
+            <BackFlipper className="back">
+              <p>Pokémon nº: {pokemon.id}</p>
+              <p>Habilidade Principal:</p>
+              <p>{pokemon.habilidade}</p>
+              <p>hp: {pokemon.hp}</p>
+              <p>ataque: {pokemon.ataque}</p>
+              <p>defesa: {pokemon.defesa}</p>
+              <p>ataque especial: {pokemon.ataqueS}</p>
+              <p>defesa especial: {pokemon.defesaS}</p>
+              <p>velocidade: {pokemon.velocidade}</p>
+            </BackFlipper>
           </PokemonContainer>
         </FlipContainer>
       </Card>
-
     );
   })
 
