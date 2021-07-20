@@ -1,11 +1,11 @@
 # POKEDEX
 
 Nome dos integrantes: 
-- Pessoa 1
-- Pessoa 2
-- Pessoa 3
+- Brendha Barbosa
+- Rafael Silveira
+- Matheus Rodrigues
 
-Link do Surge: www.link.com.br
+Link do Surge: https://pokedex-bmr.surge.sh/game
 
 O que funciona:
 - Item 1

@@ -1,0 +1,20 @@
+{
+  "short_name": "Pokedex",
+  "name": "Pokedex - Brendha, Matheus e Rafael",
+  "icons": [
+    {
+      "src": "pokebola-logo3.png",
+      "sizes": "100x100",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "pokebola-logo3.png",
+      "type": "image/png",
+      "sizes": "700x700"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
